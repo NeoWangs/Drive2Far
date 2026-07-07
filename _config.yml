@@ -1,0 +1,135 @@
+title: Mr.Drive2Far
+subtitle: 开过头先生的主页
+description: ""
+keywords:
+author: Neo One
+lang: zh-CN
+language: zh-cn
+timezone: Asia/Shanghai
+url: "https://www.cssass.com"
+baseurl: ""
+
+permalink: /:year/:month/:day/:slug/
+future: true
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+feed:
+  path: atom.xml
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .bundle
+  - .codex_tmp
+  - tags
+  - categories
+
+heibai:
+  accent: "#C3272B"
+  default_theme: light
+  brand_mark: 王白之印
+  brand_mark_chars: [王, 白, 之, 印]
+  brand_mark_cols: 2
+  brand_mark_size: 15
+  show_ticker: true
+  categories:
+    - name: developer
+      en: DEVELOPER
+      cn: 开发
+      desc: 前端 · 图形 · 实验
+    - name: scientist
+      en: SCIENTIST
+      cn: 格物
+      desc: 科学与思考
+    - name: economic
+      en: ECONOMIC
+      cn: 经济
+      desc: 经济观察
+    - name: essay
+      en: ESSAY
+      cn: 闲情偶寄
+      desc: 生活随笔
+  hero:
+    since: "SINCE 2011 — “三人行必有我师焉” — HELLO WORLD"
+    title_line1: "MR."
+    title_line2_prefix: "DRIVE"
+    title_line2_suffix: "FAR"
+    title_cn: 开过头先生
+    subtitle: 写代码，也读诗
+    motto: 知其白，守其黑，为天下式
+    poem:
+      lines: 莫听穿林打叶声，何妨吟啸且徐行。竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。
+      author: 苏轼 · 定风波
+  about:
+    title_line1: HELLO
+    title_line2: WORLD
+    text:
+      - 开过头先生，Mr.Drive2Far。
+      - 白日写代码，闲时读诗书。
+      - 信「三人行必有我师焉」，
+      - 亦信「知其白，守其黑」。
+    poem:
+      lines: 君不见高堂明镜悲白发，朝如青丝暮成雪。
+      author: 李白 · 将进酒
+  article_aside: 天行有常，不为尧存，不为桀亡
+  timeline:
+    - year: "2011"
+      title: 博客开张，Hello World
+      desc: 第一篇：《浅析圆形物体的碰撞检测及应用》
+    - year: "2012"
+      title: canvas 像素级操作系列 · Three.js 3D 实验
+      desc: 一年写了十余篇，折腾卷积矩阵与 3D Transform
+    - year: "2013"
+      title: 「鲸鱼夫妇」与 3D 螺旋线
+      desc: 用代码画浪漫
+    - year: "2014"
+      title: Unicode 里的 Emoji 考据
+      desc: 顺带解释了 Date 对象的奇葩设定
+    - year: "2016"
+      title: 《天命：响应式布局的单位——VW/VH》
+      desc: 知单位之所相对，知布局之所以动
+    - year: "2026"
+      title: 博客重新设计
+      desc: 知其白，守其黑——黑白双主题上线
+  footer:
+    couplet: ["海内存知己", "天涯若比邻"]
+    links:
+      - name: Neo 的数字花园
+        url: https://www.neoxmind.com/
+      - name: HeiBai · 黑白双式主题
+        url: https://github.com/NeoWangs/hexo-theme-heibai
+      - name: 申请友链
+        url: mailto:neoxone2@gmail.com
+    social:
+      - name: GitHub
+        url: https://github.com/neoxone2
+      - name: 知乎
+        url: https://www.zhihu.com/people/neoxone
+    contact_email: neoxone2@gmail.com
+    copyright: "Mr.Drive2Far © 2011–2026 · 由 Jekyll 及 王白先生 驱动"
+    beian:
+      text: 浙ICP备09004927号
+      url: http://beian.miit.gov.cn/
+  comments:
+    enable: true
+    owner: neoxone2
+    admin: neoxone2
+    repo: hexo_comments
+    clientID: bc87b42f6b10a638d798
+    clientSecret: bf741d0c9c429f37a79b88c8cabc3955ab64af41
+    language: zh-CN
+  mathjax: true

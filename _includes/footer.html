@@ -1,0 +1,28 @@
+<footer class="site-footer">
+  <div class="site-footer__grid">
+    <div class="site-footer__couplet">
+      {% for line in site.heibai.footer.couplet %}<span{% if forloop.last %} class="accent"{% endif %}>{{ line }}</span>{% endfor %}
+    </div>
+    <div class="site-footer__col">
+      <div class="site-footer__col-label mono">朋友</div>
+      {% for link in site.heibai.footer.links %}
+      <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.name }} ↗</a>
+      {% endfor %}
+    </div>
+    <div class="site-footer__col">
+      <div class="site-footer__col-label mono">账号</div>
+      {% for item in site.heibai.footer.social %}
+      <a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.name }} ↗</a>
+      {% endfor %}
+    </div>
+    <div class="site-footer__col">
+      <div class="site-footer__col-label mono">联系</div>
+      <a class="mono" href="mailto:{{ site.heibai.footer.contact_email }}">{{ site.heibai.footer.contact_email }}</a>
+    </div>
+  </div>
+  <div class="site-footer__bottom">
+    <span>{{ site.heibai.footer.copyright }}</span>
+    <a href="{{ site.heibai.footer.beian.url }}" target="_blank" rel="noopener">{{ site.heibai.footer.beian.text }}</a>
+  </div>
+</footer>
+

@@ -1,0 +1,54 @@
+---
+layout: default
+---
+<main class="article-main">
+  <div class="article-main__aside">{{ site.heibai.article_aside }}</div>
+  <article class="article">
+    {% assign first_category = page.category | default: page.categories[0] %}
+    {% if first_category %}
+    <a class="article__back mono" href="{{ '/' | append: first_category | append: '/' | relative_url }}">← {{ first_category | upcase }}</a>
+    {% endif %}
+    <h1 class="article__title">{{ page.title }}</h1>
+    <div class="article__meta mono">
+      <span>{{ page.date | date: '%Y.%m.%d' }}</span>
+      {% for tag in page.tags %}<span class="accent">#{{ tag }}</span>{% endfor %}
+      {% assign article_text = content | strip_html | strip_newlines %}
+      {% assign minutes = article_text.size | divided_by: 400 | plus: 1 %}
+      <span>约 {{ minutes }} 分钟</span>
+    </div>
+    <div class="article-content">{{ content }}</div>
+    <div class="article__end">
+      <div class="article__end-mark">完</div>
+    </div>
+  </article>
+
+  {% if site.heibai.comments.enable %}
+  {% include comments.html %}
+  {% endif %}
+</main>
+
+<div class="post-nav">
+  {% if page.previous %}
+  <a class="post-nav__item post-nav__item--prev" href="{{ page.previous.url | relative_url }}">
+    <div class="post-nav__label mono">← 上一篇</div>
+    <div class="post-nav__title">{{ page.previous.title }}</div>
+  </a>
+  {% else %}
+  <div class="post-nav__item post-nav__item--prev post-nav__item--empty">
+    <div class="post-nav__label mono">← 上一篇</div>
+    <div class="post-nav__title">已是最早一篇</div>
+  </div>
+  {% endif %}
+  {% if page.next %}
+  <a class="post-nav__item" href="{{ page.next.url | relative_url }}">
+    <div class="post-nav__label mono">下一篇 →</div>
+    <div class="post-nav__title">{{ page.next.title }}</div>
+  </a>
+  {% else %}
+  <div class="post-nav__item post-nav__item--empty">
+    <div class="post-nav__label mono">下一篇 →</div>
+    <div class="post-nav__title">已是最新一篇</div>
+  </div>
+  {% endif %}
+</div>
+

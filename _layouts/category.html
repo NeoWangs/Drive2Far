@@ -1,0 +1,48 @@
+---
+layout: default
+---
+{% assign cat_config = nil %}
+{% for item in site.heibai.categories %}
+  {% if item.name == page.category %}
+    {% assign cat_config = item %}
+  {% endif %}
+{% endfor %}
+{% assign category_posts = site.categories[page.category] %}
+<main>
+  <section class="list-hero">
+    <div>
+      <div class="list-hero__label mono">分类 / CATEGORY</div>
+      <div class="list-hero__en">{{ cat_config.en | default: page.category | upcase }}</div>
+    </div>
+    <div class="list-hero__cn">{{ cat_config.cn | default: page.category }}</div>
+  </section>
+
+  <div class="tabs">
+    {% for cat in site.heibai.categories %}
+    <a class="tab{% if cat.name == page.category %} is-active{% endif %}" href="{{ '/' | append: cat.name | append: '/' | relative_url }}">{% if cat.name == 'essay' %}{{ cat.cn }}{% else %}{{ cat.en }}{% endif %}</a>
+    {% endfor %}
+  </div>
+
+  <section class="year-groups">
+    {% if category_posts == nil or category_posts.size == 0 %}
+    <p class="list-note mono">※ 这个分类暂时还没有文章</p>
+    {% else %}
+    {% assign groups = category_posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+    {% for group in groups %}
+    <div class="year-group">
+      <div class="year-group__label">{{ group.name }}</div>
+      <div class="year-group__posts">
+        {% for post in group.items %}
+        <a class="post-row" href="{{ post.url | relative_url }}">
+          <span class="post-row__title">{{ post.title }}</span>
+          <span class="post-row__tags mono">{% if post.tags and post.tags.size > 0 %}#{{ post.tags[0] }}{% endif %}</span>
+          <span class="post-row__date mono">{{ post.date | date: '%Y.%m.%d' }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </section>
+</main>
+

@@ -1,0 +1,36 @@
+---
+layout: default
+---
+{% assign tag_posts = site.tags[page.tag] %}
+<main>
+  <section class="list-hero">
+    <div>
+      <div class="list-hero__label mono">标签 / TAG</div>
+      <div class="list-hero__en">{{ page.tag | upcase }}</div>
+    </div>
+    <div class="list-hero__cn">#{{ page.tag }}</div>
+  </section>
+
+  <section class="year-groups">
+    {% if tag_posts == nil or tag_posts.size == 0 %}
+    <p class="list-note mono">※ 这个标签暂时还没有文章</p>
+    {% else %}
+    {% assign groups = tag_posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+    {% for group in groups %}
+    <div class="year-group">
+      <div class="year-group__label">{{ group.name }}</div>
+      <div class="year-group__posts">
+        {% for post in group.items %}
+        <a class="post-row" href="{{ post.url | relative_url }}">
+          <span class="post-row__title">{{ post.title }}</span>
+          <span class="post-row__tags mono">{% assign first_category = post.category | default: post.categories[0] %}{{ first_category | upcase }}</span>
+          <span class="post-row__date mono">{{ post.date | date: '%Y.%m.%d' }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </section>
+</main>
+

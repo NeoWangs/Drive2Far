@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div class="comments" id="gitalk-container"></div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+(function () {
+  var param = {
+    clientID: '{{ site.heibai.comments.clientID }}',
+    clientSecret: '{{ site.heibai.comments.clientSecret }}',
+    repo: '{{ site.heibai.comments.repo }}',
+    owner: '{{ site.heibai.comments.owner }}',
+    admin: ['{{ site.heibai.comments.admin }}'],
+    id: location.pathname,
+    language: '{{ site.heibai.comments.language | default: "zh-CN" }}'
+  };
+  var gitalk = new Gitalk(param);
+  gitalk.render('gitalk-container');
+})();
+</script>
+

@@ -1,0 +1,72 @@
+---
+layout: default
+---
+<main>
+  <section class="hero">
+    <div class="hero__main">
+      <div class="hero__since mono">{{ site.heibai.hero.since }}</div>
+      <div>
+        <div class="hero__title">{{ site.heibai.hero.title_line1 }}<br>{{ site.heibai.hero.title_line2_prefix }}<span class="accent">2</span>{{ site.heibai.hero.title_line2_suffix }}</div>
+        <div class="hero__cn">
+          <span class="hero__cn-name">{{ site.heibai.hero.title_cn }}</span>
+          <span class="hero__cn-sub">{{ site.heibai.hero.subtitle }}</span>
+        </div>
+      </div>
+      <div class="hero__motto">
+        <span class="hero__motto-bar"></span>
+        <span>{{ site.heibai.hero.motto }}</span>
+      </div>
+    </div>
+    <div class="hero__poem">
+      <div class="hero__poem-text">{{ site.heibai.hero.poem.lines }}</div>
+      <div class="hero__poem-side">
+        <div class="hero__poem-author">{{ site.heibai.hero.poem.author }}</div>
+        <div class="hero__seal">印</div>
+      </div>
+    </div>
+  </section>
+
+  {% if site.heibai.show_ticker %}
+  <div class="ticker">
+    <div class="ticker__track">
+      <span class="ticker__item mono">DEVELOPER ※ SCIENTIST ※ ECONOMIC ※ 闲情偶寄 ※ 知其白 守其黑 ※ JEKYLL 独立博客 ※ SINCE 2011 ※&nbsp;</span>
+      <span class="ticker__item mono">DEVELOPER ※ SCIENTIST ※ ECONOMIC ※ 闲情偶寄 ※ 知其白 守其黑 ※ JEKYLL 独立博客 ※ SINCE 2011 ※&nbsp;</span>
+    </div>
+  </div>
+  {% endif %}
+
+  <section class="categories">
+    <div class="categories__grid">
+      {% for cat in site.heibai.categories %}
+      <a class="category-card" href="{{ '/' | append: cat.name | append: '/' | relative_url }}">
+        <div class="category-card__top">
+          <span class="category-card__num mono">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <span class="category-card__arrow">→</span>
+        </div>
+        <div class="category-card__en">{{ cat.en }}</div>
+        <div class="category-card__meta">
+          <span class="category-card__cn">{{ cat.cn }}</span>
+          <span class="category-card__desc">{{ cat.desc }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="recent">
+    <div class="recent__heading">
+      <span class="heading-cn">近期</span>
+      <span class="heading-en">RECENT WRITING</span>
+    </div>
+    <div class="recent__list">
+      {% for post in site.posts limit: 3 %}
+      <a class="recent__item" href="{{ post.url | relative_url }}">
+        <span class="recent__date mono">{{ post.date | date: '%Y.%m.%d' }}</span>
+        <span class="recent__title">{{ post.title }}</span>
+        <span class="recent__tags mono">{% if post.tags and post.tags.size > 0 %}#{{ post.tags[0] }}{% endif %}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+

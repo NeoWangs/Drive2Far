@@ -1,0 +1,10 @@
+_site/
+.jekyll-cache/
+.sass-cache/
+vendor/
+.bundle/
+.codex_tmp/
+.DS_Store
+*.gem
+tags/
+categories/

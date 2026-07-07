@@ -1,0 +1,8 @@
+---
+layout: null
+permalink: /sitemap.txt
+---
+{{ site.url }}{{ '/' | relative_url }}
+{% for post in site.posts %}{{ site.url }}{{ post.url | relative_url }}
+{% endfor %}{% for cat in site.heibai.categories %}{{ site.url }}{{ '/' | append: cat.name | append: '/' | relative_url }}
+{% endfor %}{{ site.url }}{{ '/about/' | relative_url }}

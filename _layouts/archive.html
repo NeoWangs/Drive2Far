@@ -1,0 +1,31 @@
+---
+layout: default
+---
+<main>
+  <section class="list-hero">
+    <div>
+      <div class="list-hero__label mono">归档 / ARCHIVE</div>
+      <div class="list-hero__en">ARCHIVES</div>
+    </div>
+    <div class="list-hero__cn">年岁</div>
+  </section>
+
+  <section class="year-groups">
+    {% assign groups = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+    {% for group in groups %}
+    <div class="year-group">
+      <div class="year-group__label">{{ group.name }}</div>
+      <div class="year-group__posts">
+        {% for post in group.items %}
+        <a class="post-row" href="{{ post.url | relative_url }}">
+          <span class="post-row__title">{{ post.title }}</span>
+          <span class="post-row__tags mono">{% if post.tags and post.tags.size > 0 %}#{{ post.tags[0] }}{% endif %}</span>
+          <span class="post-row__date mono">{{ post.date | date: '%Y.%m.%d' }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+</main>
+

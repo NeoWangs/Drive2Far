@@ -1,0 +1,40 @@
+---
+layout: default
+---
+<main class="about-main">
+  <aside class="about-aside">
+    <div>
+      <div class="about-aside__label mono">关于 / ABOUT</div>
+      <div class="about-aside__title">{{ site.heibai.about.title_line1 }}<br>{{ site.heibai.about.title_line2 }}<span class="accent">.</span></div>
+    </div>
+    <p class="about-aside__text">
+      {% for line in site.heibai.about.text %}{{ line }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}
+    </p>
+    <div class="about-aside__poem">
+      <div class="about-aside__poem-text">{{ site.heibai.about.poem.lines }}</div>
+      <div class="about-aside__poem-author">{{ site.heibai.about.poem.author }}</div>
+    </div>
+  </aside>
+  <section class="timeline-section">
+    <div class="timeline-section__heading">
+      <span class="heading-cn">时间线</span>
+      <span class="heading-en">TIMELINE</span>
+    </div>
+    <div class="timeline">
+      {% for item in site.heibai.timeline %}
+      <div class="timeline__item">
+        <div class="timeline__year">{{ item.year }}</div>
+        <div class="timeline__rail">
+          <div class="timeline__dot"></div>
+          <div class="timeline__line"></div>
+        </div>
+        <div class="timeline__body">
+          <div class="timeline__title">{{ item.title }}</div>
+          <div class="timeline__desc">{{ item.desc }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+

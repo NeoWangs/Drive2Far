@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>404 - 页面不存在</title>
+  <script>
+    (function () {
+      var path = window.location.pathname;
+      if (path === '/blog' || path === '/blog/' || path.indexOf('/blog/') === 0) {
+        var blogRest = path.replace(/^\/blog\/?/, '');
+        var targetPath = blogRest ? '/' + blogRest : '/';
+        window.location.replace('https://cssass.com' + targetPath + window.location.search + window.location.hash);
+      } else if (path === '/show' || path === '/show/' || path.indexOf('/show/') === 0) {
+        var rest = path.replace(/^\/show\/?/, '');
+        window.location.replace('https://show.cssass.com/' + rest + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #333;
+      background: #fff;
+    }
+    h1 { font-size: 6rem; margin: 0; font-weight: 300; letter-spacing: 0.1em; }
+    p { color: #888; margin: 1rem 0 2rem; }
+    a { color: #333; border-bottom: 1px solid #333; text-decoration: none; padding-bottom: 2px; }
+    a:hover { opacity: 0.6; }
+  </style>
+</head>
+<body>
+  <h1>404</h1>
+  <p>你访问的页面不存在</p>
+  <a href="https://cssass.com/">返回首页</a>
+</body>
+</html>
