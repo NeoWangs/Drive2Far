@@ -11,7 +11,10 @@ layout: default
     <h1 class="article__title">{{ page.title }}</h1>
     <div class="article__meta mono">
       <span>{{ page.date | date: '%Y.%m.%d' }}</span>
-      {% for tag in page.tags %}<span class="accent">#{{ tag }}</span>{% endfor %}
+      {% for tag in page.tags %}
+      {% assign tag_path = tag | strip | replace: '/', '-' %}
+      <a class="article__tag accent" href="{{ '/tags/' | append: tag_path | append: '/' | relative_url }}">#{{ tag }}</a>
+      {% endfor %}
       {% assign article_text = content | strip_html | strip_newlines %}
       {% assign minutes = article_text.size | divided_by: 400 | plus: 1 %}
       <span>约 {{ minutes }} 分钟</span>
@@ -51,4 +54,3 @@ layout: default
   </div>
   {% endif %}
 </div>
-

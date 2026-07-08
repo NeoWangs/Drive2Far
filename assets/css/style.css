@@ -589,6 +589,13 @@ a {
   border-bottom: 1px solid var(--line);
   margin-bottom: 44px;
 }
+.article__tag {
+  text-decoration: none;
+}
+.article__tag:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .article-content {
   font-size: 17px;
   line-height: 2.1;
