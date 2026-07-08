@@ -7,11 +7,17 @@ require "json"
 require "set"
 
 site_dir = ARGV[0] || "_site"
-base_path = (ARGV[1] || ENV.fetch("PAGES_BASE_PATH", "")).to_s
-base_path = "" if base_path == "/"
-base_path = "/#{base_path}" unless base_path.empty? || base_path.start_with?("/")
-base_path = base_path.delete_suffix("/")
 abort "Missing site directory: #{site_dir}" unless Dir.exist?(site_dir)
+
+def normalize_base_path(path)
+  path = path.to_s
+  path = "" if path == "/"
+  path = "/#{path}" unless path.empty? || path.start_with?("/")
+  path.delete_suffix("/")
+end
+
+base_path = normalize_base_path(ARGV[1] || ENV.fetch("PAGES_BASE_PATH", ""))
+legacy_project_path = normalize_base_path(ARGV[2] || ENV.fetch("LEGACY_PROJECT_PATH", "/Drive2Far"))
 
 def local_url(path, base_path)
   normalized = "/#{path}".squeeze("/")
@@ -82,6 +88,20 @@ Find.find(site_dir) do |path|
 
   target = "/#{relative.delete_suffix("index.html")}"
   redirects["/blog#{target}"] = local_url(target, base_path)
+end
+
+unless legacy_project_path.empty?
+  legacy_relative_prefix = legacy_project_path.delete_prefix("/")
+
+  Find.find(site_dir) do |path|
+    next unless path.end_with?("/index.html")
+
+    relative = path.delete_prefix("#{site_dir}/")
+    next if relative.start_with?("blog/", "show/", "#{legacy_relative_prefix}/")
+
+    target = "/#{relative.delete_suffix("index.html")}"
+    redirects["#{legacy_project_path}#{target}"] = local_url(target, base_path)
+  end
 end
 
 show_paths = Set["/show/"]

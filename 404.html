@@ -12,6 +12,10 @@
         var blogRest = path.replace(/^\/blog\/?/, '');
         var targetPath = blogRest ? '/' + blogRest : '/';
         window.location.replace('https://cssass.com' + targetPath + window.location.search + window.location.hash);
+      } else if (path === '/Drive2Far' || path === '/Drive2Far/' || path.indexOf('/Drive2Far/') === 0) {
+        var projectRest = path.replace(/^\/Drive2Far\/?/, '');
+        var projectTargetPath = projectRest ? '/' + projectRest : '/';
+        window.location.replace('https://cssass.com' + projectTargetPath + window.location.search + window.location.hash);
       } else if (path === '/show' || path === '/show/' || path.indexOf('/show/') === 0) {
         var rest = path.replace(/^\/show\/?/, '');
         window.location.replace('https://show.cssass.com/' + rest + window.location.search + window.location.hash);
