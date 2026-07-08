@@ -1043,7 +1043,7 @@ a {
 .pin .boxCont {
   position: relative;
   min-height: 120px;
-  margin: 15px;
+  margin: 5px;
   padding: 10px;
   border: 1px solid #ccc;
   background: #eee;
@@ -1070,7 +1070,7 @@ a {
   font-size: 15px;
   font-family: 'PingFang SC';
   border: 1px solid var(--line);
-  padding: 24px 28px;
+  padding: 14px 18px;
   overflow: auto;
 }
 .pin .boxCont::before {
