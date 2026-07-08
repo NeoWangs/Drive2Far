@@ -6,6 +6,8 @@ module Jekyll
   module HexoPinCompat
     PIN_BLOCK_PATTERN = %r{<(section|li)\b([^>]*\bclass=(["'])[^"']*\bpin\b[^"']*\3[^>]*)>.*?</\1>}im.freeze
     TITLE_PATTERN = %r{<div\b([^>]*\bclass=(["'])[^"']*\btitle\b[^"']*\2[^>]*)>(.*?)</div>}im.freeze
+    OBSIDIAN_PIN_START_PATTERN = /\A>\s*\[!(?:pin|poem)\][+-]?\s*(.*?)\s*\z/i.freeze
+    BLOCKQUOTE_LINE_PATTERN = /\A>\s?(.*)\z/.freeze
 
     module_function
 
@@ -61,6 +63,39 @@ module Jekyll
       HTML
     end
 
+    def expand_obsidian_pin_callouts(markdown)
+      lines = markdown.to_s.lines(chomp: true)
+      expanded = []
+      index = 0
+
+      while index < lines.length
+        line = lines[index]
+        match = line.match(OBSIDIAN_PIN_START_PATTERN)
+
+        unless match
+          expanded << line
+          index += 1
+          next
+        end
+
+        title, desc = parse_markup(match[1])
+        body_lines = []
+        index += 1
+
+        while index < lines.length
+          body_match = lines[index].match(BLOCKQUOTE_LINE_PATTERN)
+          break unless body_match
+
+          body_lines << body_match[1]
+          index += 1
+        end
+
+        expanded << render_pin(title, desc, body_lines.join("\n"))
+      end
+
+      expanded.join("\n") + (markdown.to_s.end_with?("\n") ? "\n" : "")
+    end
+
     def wrap_consecutive_pins(output)
       return output unless output.to_s.match?(/\bclass=(["'])[^"']*\bpin\b/i)
 
@@ -114,6 +149,12 @@ module Jekyll
 end
 
 Liquid::Template.register_tag("pin", Jekyll::PinBlock)
+
+%i[documents pages].each do |owner|
+  Jekyll::Hooks.register owner, :pre_render do |doc|
+    doc.content = Jekyll::HexoPinCompat.expand_obsidian_pin_callouts(doc.content)
+  end
+end
 
 %i[documents pages].each do |owner|
   Jekyll::Hooks.register owner, :post_render do |doc|
