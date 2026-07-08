@@ -26,17 +26,18 @@ jobs:
           bundler: "2.4.22"
           bundler-cache: true
 
-      - uses: actions/configure-pages@v5
+      - id: pages
+        uses: actions/configure-pages@v5
         with:
           enablement: true
 
       - name: Build Jekyll
-        run: bundle exec jekyll build
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
 
       - name: Generate legacy redirects
-        run: ruby scripts/generate_legacy_redirects.rb _site
+        run: ruby scripts/generate_legacy_redirects.rb _site "${{ steps.pages.outputs.base_path }}"
 
       - uses: actions/upload-pages-artifact@v4
         with:

@@ -7,7 +7,18 @@ require "json"
 require "set"
 
 site_dir = ARGV[0] || "_site"
+base_path = (ARGV[1] || ENV.fetch("PAGES_BASE_PATH", "")).to_s
+base_path = "" if base_path == "/"
+base_path = "/#{base_path}" unless base_path.empty? || base_path.start_with?("/")
+base_path = base_path.delete_suffix("/")
 abort "Missing site directory: #{site_dir}" unless Dir.exist?(site_dir)
+
+def local_url(path, base_path)
+  normalized = "/#{path}".squeeze("/")
+  return normalized if base_path.empty?
+
+  "#{base_path}#{normalized}"
+end
 
 def redirect_html(target)
   target_json = JSON.generate(target)
@@ -61,6 +72,7 @@ redirects["/blog/"] = "/"
   "/blog/economic/" => "/economic/",
   "/blog/essay/" => "/essay/"
 }.each { |source, target| redirects[source] = target }
+redirects.transform_values! { |target| target.start_with?("/") ? local_url(target, base_path) : target }
 
 Find.find(site_dir) do |path|
   next unless path.end_with?("/index.html")
@@ -69,7 +81,7 @@ Find.find(site_dir) do |path|
   next unless relative.match?(%r{\A\d{4}/\d{2}/\d{2}/.+/index\.html\z})
 
   target = "/#{relative.delete_suffix("index.html")}"
-  redirects["/blog#{target}"] = target
+  redirects["/blog#{target}"] = local_url(target, base_path)
 end
 
 show_paths = Set["/show/"]
