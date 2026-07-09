@@ -36,9 +36,6 @@ jobs:
         env:
           JEKYLL_ENV: production
 
-      - name: Generate legacy redirects
-        run: ruby scripts/generate_legacy_redirects.rb _site "${{ steps.pages.outputs.base_path }}"
-
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site

@@ -5,28 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <title>404 - 页面不存在</title>
-  <script>
-    (function () {
-      var path = window.location.pathname;
-      var legacyHosts = { 'cssass.com': true, 'www.cssass.com': true };
-      var canonicalOrigin = 'https://blog.neoxmind.com';
-
-      if (path === '/blog' || path === '/blog/' || path.indexOf('/blog/') === 0) {
-        var blogRest = path.replace(/^\/blog\/?/, '');
-        var targetPath = blogRest ? '/' + blogRest : '/';
-        window.location.replace(canonicalOrigin + targetPath + window.location.search + window.location.hash);
-      } else if (path === '/Drive2Far' || path === '/Drive2Far/' || path.indexOf('/Drive2Far/') === 0) {
-        var projectRest = path.replace(/^\/Drive2Far\/?/, '');
-        var projectTargetPath = projectRest ? '/' + projectRest : '/';
-        window.location.replace(canonicalOrigin + projectTargetPath + window.location.search + window.location.hash);
-      } else if (path === '/show' || path === '/show/' || path.indexOf('/show/') === 0) {
-        var rest = path.replace(/^\/show\/?/, '');
-        window.location.replace('https://show.neoxmind.com/' + rest + window.location.search + window.location.hash);
-      } else if (legacyHosts[window.location.hostname]) {
-        window.location.replace(canonicalOrigin + path + window.location.search + window.location.hash);
-      }
-    })();
-  </script>
   <style>
     body {
       margin: 0;
