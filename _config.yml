@@ -6,7 +6,7 @@ author: Neo One
 lang: zh-CN
 language: zh-cn
 timezone: Asia/Shanghai
-url: "https://cssass.com"
+url: "https://blog.neoxmind.com"
 baseurl: ""
 
 permalink: /:year/:month/:day/:slug/

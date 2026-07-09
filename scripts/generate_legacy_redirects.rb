@@ -115,7 +115,7 @@ end
 
 show_paths.each do |source|
   target_path = source.sub(%r{\A/show/?}, "")
-  redirects[source] = "https://show.cssass.com/#{target_path}"
+  redirects[source] = "https://show.neoxmind.com/#{target_path}"
 end
 
 redirects.sort.each do |source, target|

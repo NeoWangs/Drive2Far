@@ -23,7 +23,7 @@ permalink: "/2014/05/09/Unicode中的Emoji表情字符/"
 	h3{padding:20px 10px;background:#eee;}
 	p{word-wrap:break-word;border:1px solid #ccc; padding:10px;}
 </style>
-<script src="https://show.cssass.com/public/js/extend.js"></script>
+<script src="https://show.neoxmind.com/public/js/extend.js"></script>
 </head>
 <body>
 <div id="showcode">

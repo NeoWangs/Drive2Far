@@ -8,17 +8,22 @@
   <script>
     (function () {
       var path = window.location.pathname;
+      var legacyHosts = { 'cssass.com': true, 'www.cssass.com': true };
+      var canonicalOrigin = 'https://blog.neoxmind.com';
+
       if (path === '/blog' || path === '/blog/' || path.indexOf('/blog/') === 0) {
         var blogRest = path.replace(/^\/blog\/?/, '');
         var targetPath = blogRest ? '/' + blogRest : '/';
-        window.location.replace('https://cssass.com' + targetPath + window.location.search + window.location.hash);
+        window.location.replace(canonicalOrigin + targetPath + window.location.search + window.location.hash);
       } else if (path === '/Drive2Far' || path === '/Drive2Far/' || path.indexOf('/Drive2Far/') === 0) {
         var projectRest = path.replace(/^\/Drive2Far\/?/, '');
         var projectTargetPath = projectRest ? '/' + projectRest : '/';
-        window.location.replace('https://cssass.com' + projectTargetPath + window.location.search + window.location.hash);
+        window.location.replace(canonicalOrigin + projectTargetPath + window.location.search + window.location.hash);
       } else if (path === '/show' || path === '/show/' || path.indexOf('/show/') === 0) {
         var rest = path.replace(/^\/show\/?/, '');
-        window.location.replace('https://show.cssass.com/' + rest + window.location.search + window.location.hash);
+        window.location.replace('https://show.neoxmind.com/' + rest + window.location.search + window.location.hash);
+      } else if (legacyHosts[window.location.hostname]) {
+        window.location.replace(canonicalOrigin + path + window.location.search + window.location.hash);
       }
     })();
   </script>
@@ -43,6 +48,6 @@
 <body>
   <h1>404</h1>
   <p>你访问的页面不存在</p>
-  <a href="https://cssass.com/">返回首页</a>
+  <a href="https://blog.neoxmind.com/">返回首页</a>
 </body>
 </html>
