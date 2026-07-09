@@ -12,11 +12,12 @@ permalink: "/2008/11/20/Position定位巧做彩虹字，倒影字效果/"
 ---
 
 "阴阳字"
-<div class="runcode"><textarea class="runcode_text" id="runcode_20081120_Position__1">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;style type="text/css"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style type="text/css">
 body{background:#E9F5EE; font-family:'黑体';  font-size:15pt;}
 .wrap{
     position:absolute;
@@ -28,22 +29,24 @@ body{background:#E9F5EE; font-family:'黑体';  font-size:15pt;}
     top:-8pt;
     color:#ccc;
    }
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style="position:relative;"&gt;
-&lt;div class="wrap"&gt;&lt;span class="color"&gt;半色字213font阴阳字（只限单行文字）&lt;/span&gt;&lt;/div&gt;
-&lt;span class="back"&gt;半色字213font阴阳字（只限单行文字）&lt;/span&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20081120_Position__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20081120_Position__1')">Copy</button></div></div>
+</style>
+</head>
+<body>
+<div style="position:relative;">
+<div class="wrap"><span class="color">半色字213font阴阳字（只限单行文字）</span></div>
+<span class="back">半色字213font阴阳字（只限单行文字）</span>
+</div>
+</body>
+</html>
+```
 
 彩虹字
-<div class="runcode"><textarea class="runcode_text" id="runcode_20081120_Position__2">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;style type="text/css"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style type="text/css">
 body{background:#3e4b5c; color:#b7e2e9; font-size:15pt;}
 .fonts{position:absolute; overflow:hidden; height:2pt;  }
 .colors{position:relative;}
@@ -61,27 +64,29 @@ body{background:#3e4b5c; color:#b7e2e9; font-size:15pt;}
 .colors5{ top:-9pt; color:#bccbd9;}
 .fonts6{ top:11pt; }
 .colors6{ top:-11pt; color:#b7e2e9;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style="position:relative;"&gt;
-    &lt;div class="fonts fonts0"&gt;&lt;span class="colors colors0"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="fonts fonts1"&gt;&lt;span class="colors colors1"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="fonts fonts2"&gt;&lt;span class="colors colors2"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="fonts fonts3"&gt;&lt;span class="colors colors3"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="fonts fonts4"&gt;&lt;span class="colors colors4"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="fonts fonts5"&gt;&lt;span class="colors colors5"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="fonts fonts6"&gt;&lt;span class="colors colors6"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;span class="back"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20081120_Position__2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20081120_Position__2')">Copy</button></div></div>
+</style>
+</head>
+<body>
+<div style="position:relative;">
+    <div class="fonts fonts0"><span class="colors colors0">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <div class="fonts fonts1"><span class="colors colors1">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <div class="fonts fonts2"><span class="colors colors2">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <div class="fonts fonts3"><span class="colors colors3">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <div class="fonts fonts4"><span class="colors colors4">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <div class="fonts fonts5"><span class="colors colors5">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <div class="fonts fonts6"><span class="colors colors6">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <span class="back">阔地网络阔地网络阔地网络阔地网络</span>
+</div>
+</body>
+</html>
+```
 倒影字：
-<div class="runcode"><textarea class="runcode_text" id="runcode_20081120_Position__3">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;style type="text/css"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style type="text/css">
 body{background:#E9F5EE; font-family:'黑体';  font-size:18px;}
 .fonts{position:absolute; overflow:hidden; height:1px;}
 .back{position:relative;}
@@ -99,18 +104,19 @@ body{background:#E9F5EE; font-family:'黑体';  font-size:18px;}
 .back5{ top:-10px; color:#ccc;}
 .fonts6{ top:24px; }
 .back6{ top:-9px; color:#ddd;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style="position:relative; height:25px;"&gt;
-    &lt;div class="fonts fonts0"&gt;&lt;span class="back back0"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="fonts fonts1"&gt;&lt;span class="back back1"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="fonts fonts2"&gt;&lt;span class="back back2"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="fonts fonts3"&gt;&lt;span class="back back3"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="fonts fonts4"&gt;&lt;span class="back back4"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="fonts fonts5"&gt;&lt;span class="back back5"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="fonts fonts6"&gt;&lt;span class="back back6"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;&lt;/div&gt;
-    &lt;span class="front"&gt;阔地网络阔地网络阔地网络阔地网络&lt;/span&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20081120_Position__3')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20081120_Position__3')">Copy</button></div></div>
+</style>
+</head>
+<body>
+<div style="position:relative; height:25px;">
+    <div class="fonts fonts0"><span class="back back0">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <div class="fonts fonts1"><span class="back back1">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <div class="fonts fonts2"><span class="back back2">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <div class="fonts fonts3"><span class="back back3">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <div class="fonts fonts4"><span class="back back4">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <div class="fonts fonts5"><span class="back back5">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <div class="fonts fonts6"><span class="back back6">阔地网络阔地网络阔地网络阔地网络</span></div>
+    <span class="front">阔地网络阔地网络阔地网络阔地网络</span>
+</div>
+</body>
+</html>
+```

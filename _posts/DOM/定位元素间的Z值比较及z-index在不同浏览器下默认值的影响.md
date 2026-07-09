@@ -22,12 +22,13 @@ z-index在ie下缺省为：z-index:0; 而FF下则缺省为：z-index:auto;
 正常情况下：兄弟（同级）元素后者居上，父子之间子高于父。
 </blockquote>
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090207__Z_z_index__1">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;各级元素间z的关系&lt;/title&gt;
-&lt;style type="text/css"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>各级元素间z的关系</title>
+<style type="text/css">
     div{display:block;width:400px;height:200px;}
 	.father1, .son1{border:2px solid #cfc}
 	.father2, .son2{border:2px solid #fcf}
@@ -36,34 +37,36 @@ z-index在ie下缺省为：z-index:0; 而FF下则缺省为：z-index:auto;
     .son1, .son2{position:absolute;background:#eee;left:20px;top:20px;}
 /* */
 	.father2{top:-40px;left:20px;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="father1"&gt;
+</style>
+</head>
+<body>
+    <div class="father1">
 	    父级1
-         &lt;div class="son1"&gt;
+         <div class="son1">
             子级1
-		 &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="father2"&gt;
+		 </div>
+    </div>
+    <div class="father2">
 	    父级2
-         &lt;div class="son2"&gt;
+         <div class="son2">
             子级2
-		 &lt;/div&gt;
- &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090207__Z_z_index__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090207__Z_z_index__1')">Copy</button></div></div>
+		 </div>
+ </div>
+</body>
+</html>
+```
 可以看出z的等级：子级2（“堂弟”）>父级2（“叔叔”）>子级1（“子”）>父级1（“父”）。
 
 如果我们想要父盖过子，兄罩着弟只需设置其z-index便可。z-index值越大，给予的z值就越大。
 那么这个设置能否改变叔侄之间，堂兄弟之间的Z呢？
 先试试看：
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090207__Z_z_index__2">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;侄子盖过叔叔，堂兄罩着堂弟&lt;/title&gt;
-&lt;style type="text/css"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>侄子盖过叔叔，堂兄罩着堂弟</title>
+<style type="text/css">
     div{display:block;width:400px;height:200px;}
 	.father1, .son1{border:2px solid #cfc}
 	.father2, .son2{border:2px solid #fcf}
@@ -72,35 +75,37 @@ z-index在ie下缺省为：z-index:0; 而FF下则缺省为：z-index:auto;
     .son1, .son2{background:#eee; }
 /* */
 	.son1{position:relative;z-index:1000;top:20px;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="father1"&gt;
+</style>
+</head>
+<body>
+    <div class="father1">
 	    父级1
-         &lt;div class="son1"&gt;
+         <div class="son1">
             子级1
-		 &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="father2"&gt;
+		 </div>
+    </div>
+    <div class="father2">
 	    父级2
-         &lt;div class="son2"&gt;
+         <div class="son2">
             子级2
-		 &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090207__Z_z_index__2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090207__Z_z_index__2')">Copy</button></div></div>
+		 </div>
+    </div>
+</body>
+</html>
+```
 
 看上去一样有效，是吧？子级1盖过了父级2和子级2。
 
 但是，再看看下面这个例子，假如各级元素都是定位元素(设置了position),情况就有些不同了（之后的讨论，都是基于这个条件之下的。我觉得position定位的应用非常广泛，基于此的研究也非常有必要）。
 
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090207__Z_z_index__3">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;ie/ff下表现不同&lt;/title&gt;
-&lt;style type="text/css"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>ie/ff下表现不同</title>
+<style type="text/css">
     div{display:block;width:400px;height:200px;}
 	.father1, .son1{border:2px solid #cfc}
 	.father2, .son2{border:2px solid #fcf}
@@ -110,33 +115,35 @@ z-index在ie下缺省为：z-index:0; 而FF下则缺省为：z-index:auto;
 	.father2{top:-40px;left:20px;}
 /* */
 	.son1{z-index:1000;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="father1"&gt;
+</style>
+</head>
+<body>
+    <div class="father1">
 	    父级1
-         &lt;div class="son1"&gt;
+         <div class="son1">
             子级1
-		 &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="father2"&gt;
+		 </div>
+    </div>
+    <div class="father2">
 	    父级2
-         &lt;div class="son2"&gt;
+         <div class="son2">
             子级2
-		 &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090207__Z_z_index__3')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090207__Z_z_index__3')">Copy</button></div></div>
+		 </div>
+    </div>
+</body>
+</html>
+```
 son1设置z-index:1000后，在FF下的z值级别就高于其叔与其堂弟father2,son2。但是在ie下这个设置却还是不行。
 这时候，我们回过头看最前面的结论：z-index在ie下缺省为：z-index:0; 而FF下则缺省为：z-index:auto;
 那么再写一个Test，将父级的z-index固定为0:
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090207__Z_z_index__4">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;Z-index默认值的影响&lt;/title&gt;
-&lt;style type="text/css"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Z-index默认值的影响</title>
+<style type="text/css">
     div{display:block;width:400px;height:200px;}
 	.father1, .son1{border:2px solid #cfc}
 	.father2, .son2{border:2px solid #fcf}
@@ -146,23 +153,24 @@ son1设置z-index:1000后，在FF下的z值级别就高于其叔与其堂弟fath
 	.father2{top:-40px;left:20px;}
 /* */
 	.son1{z-index:1000;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="father1"&gt;
+</style>
+</head>
+<body>
+    <div class="father1">
 	    父级1
-         &lt;div class="son1"&gt;
+         <div class="son1">
             子级1
-		 &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="father2"&gt;
+		 </div>
+    </div>
+    <div class="father2">
 	    父级2
-         &lt;div class="son2"&gt;
+         <div class="son2">
             子级2
-		 &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090207__Z_z_index__4')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090207__Z_z_index__4')">Copy</button></div></div>
+		 </div>
+    </div>
+</body>
+</html>
+```
 可以看出，一旦父级元素设置了相同的z-index，ff下“侄”元素一样无法超过“叔”元素和“堂弟”元素。
 
 我们可以试着得出这么一个结论：
@@ -171,12 +179,13 @@ son1设置z-index:1000后，在FF下的z值级别就高于其叔与其堂弟fath
 </blockquote>
 我们用一个三级关系来验证一下。
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090207__Z_z_index__5">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;三级关系验证本文结论&lt;/title&gt;
-&lt;style type="text/css"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>三级关系验证本文结论</title>
+<style type="text/css">
     div{display:block;width:400px;height:200px;}
 	#first,#first div{border:2px solid #cfc}
 	#second,#second div{border:2px solid #fcf}
@@ -189,29 +198,30 @@ son1设置z-index:1000后，在FF下的z值级别就高于其叔与其堂弟fath
     #first{z-index:1;}
     #first .father{z-index:1;}
     #first .son{z-index:1;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
- &lt;div id="first" class="grandfather"&gt;
+</style>
+</head>
+<body>
+ <div id="first" class="grandfather">
     祖父级
-    &lt;div class="father"&gt;
+    <div class="father">
 	    父级
-         &lt;div class="son"&gt;
+         <div class="son">
             子级
-		 &lt;/div&gt;
-    &lt;/div&gt;
- &lt;/div&gt;
- &lt;div id="second"  class="grandfather"&gt;
+		 </div>
+    </div>
+ </div>
+ <div id="second"  class="grandfather">
     祖父级
-    &lt;div class="father"&gt;
+    <div class="father">
 	    父级
-         &lt;div class="son"&gt;
+         <div class="son">
             子级
-		 &lt;/div&gt;
-    &lt;/div&gt;
- &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090207__Z_z_index__5')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090207__Z_z_index__5')">Copy</button></div></div>
+		 </div>
+    </div>
+ </div>
+</body>
+</html>
+```
 不论#first .father和#first .son如何设置，只有#first的z-index值大于0（second的z-index值为0）时，才能盖住#second。
 
 对于IE,元素的z-index缺省值是0，如果不另外设置“兄”，“弟”元素的z-index值，那么”兄”的z-index就无法大于“弟”的z-index。那么”兄”元素及其子孙就无法盖过”弟”元素及其子孙。而一旦“兄”的z-index大过了”弟”元素的z-index,那么情况就翻转了，“弟”元素及其子孙将无法盖过“兄”元素及其子孙。
@@ -219,12 +229,13 @@ son1设置z-index:1000后，在FF下的z值级别就高于其叔与其堂弟fath
 那么，IE上能否设置z-index:auto;呢？
 
 测试：
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090207__Z_z_index__6">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;测试IE下的z-index:auto属性&lt;/title&gt;
-&lt;style type="text/css"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>测试IE下的z-index:auto属性</title>
+<style type="text/css">
     div{display:block;width:400px;height:200px;}
 	#first,#first div{border:2px solid #cfc}
 	#second,#second div{border:2px solid #fcf}
@@ -236,29 +247,30 @@ son1设置z-index:1000后，在FF下的z值级别就高于其叔与其堂弟fath
 /*  #first{z-index:1;}   */
     #first .father{z-index:1;}
     #first .son{z-index:1;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
- &lt;div id="first" class="grandfather"&gt;
+</style>
+</head>
+<body>
+ <div id="first" class="grandfather">
     祖父级
-    &lt;div class="father"&gt;
+    <div class="father">
 	    父级
-         &lt;div class="son"&gt;
+         <div class="son">
             子级
-		 &lt;/div&gt;
-    &lt;/div&gt;
- &lt;/div&gt;
- &lt;div id="second"  class="grandfather"&gt;
+		 </div>
+    </div>
+ </div>
+ <div id="second"  class="grandfather">
     祖父级
-    &lt;div class="father"&gt;
+    <div class="father">
 	    父级
-         &lt;div class="son"&gt;
+         <div class="son">
             子级
-		 &lt;/div&gt;
-    &lt;/div&gt;
- &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090207__Z_z_index__6')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090207__Z_z_index__6')">Copy</button></div></div>
+		 </div>
+    </div>
+ </div>
+</body>
+</html>
+```
 可以看出，在IE下，去除#first{z-index:1}后，#first及其子孙无法盖住#second。
 而FF下，#first .father,#first .son却盖住了整个#second。
 
@@ -272,12 +284,13 @@ z-index:auto在ie下无效。
 111111
    222222
 这么一个四层交错，但要超过四层，就无能为力了。
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090207__Z_z_index__7">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;FF下的四层交错&lt;/title&gt;
-&lt;style type="text/css"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>FF下的四层交错</title>
+<style type="text/css">
     div{display:block;width:400px;height:200px;}
 	#first,#first div{border:2px solid #cfc}
 	#second,#second div{border:2px solid #fcf}
@@ -291,29 +304,30 @@ z-index:auto在ie下无效。
     #first .son{z-index:3;}
 	#second .father{z-index:2;}
 	#second .son{z-index:4;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
- &lt;div id="first" class="grandfather"&gt;
+</style>
+</head>
+<body>
+ <div id="first" class="grandfather">
     祖父级
-    &lt;div class="father"&gt;
+    <div class="father">
 	    父级
-         &lt;div class="son"&gt;
+         <div class="son">
             子级
-		 &lt;/div&gt;
-    &lt;/div&gt;
- &lt;/div&gt;
- &lt;div id="second"  class="grandfather"&gt;
+		 </div>
+    </div>
+ </div>
+ <div id="second"  class="grandfather">
     祖父级
-    &lt;div class="father"&gt;
+    <div class="father">
 	    父级
-         &lt;div class="son"&gt;
+         <div class="son">
             子级
-		 &lt;/div&gt;
-    &lt;/div&gt;
- &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090207__Z_z_index__7')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090207__Z_z_index__7')">Copy</button></div></div>
+		 </div>
+    </div>
+ </div>
+</body>
+</html>
+```
 
 补充：关于z-index:auto的解释，在W3C的CSS说明文档中的解释是：
 

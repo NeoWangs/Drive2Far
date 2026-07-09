@@ -14,19 +14,20 @@ permalink: "/2012/01/17/canvas的像素级操作——4-关注性能/"
 我们开篇就提过，canvas的像素级操作相对来说是很低效的。
 
 我们试着写一个图片切割效果。
-<div class="runcode"><textarea class="runcode_text" id="runcode_20120117_canvas_4__1">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-	&lt;meta charset="utf-8"&gt;
-	&lt;title&gt;效率相关&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;canvas id="board" width="100" height="110"&gt;&lt;/canvas&gt;
-&lt;script type="text/javascript"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>效率相关</title>
+</head>
+<body>
+<canvas id="board" width="100" height="110"></canvas>
+<script type="text/javascript">
 function splinter(ctx,imgPixels){
 	var round = 0; //统计循环次数
-	for(var y = 0; y &lt; imgPixels.height; y++){
-		for(var x = 0; x &lt; imgPixels.width; x++){
+	for(var y = 0; y < imgPixels.height; y++){
+		for(var x = 0; x < imgPixels.width; x++){
 			/* 虽然只调用了putImageData一个方法，但是操作的data非常多 */
 			ctx.putImageData(imgPixels, x, y, x, y, 1 ,1); //后四个参数控制显示区域
 			round ++ ;
@@ -57,29 +58,31 @@ function demo(img){
 			alert("耗时：" + (new Date() - d) + "(ms)，\n共执行了" + func + "次的putImageData");
 		}
 })()
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20120117_canvas_4__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20120117_canvas_4__1')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```
 
 对于这个效果，因为我们并不需要操作图像的rgba数据，而只是把图像进行分割，所以利用putImageData的后四个可见区参数进行了设置就行了。
 但是，这样做的性能却非常不理想。因为我们操作的ImageData数据实在太多了，循环执行了2750遍，相当于我们对整幅图像进行了2750次的像素级复制，而其实在可见区之外的ImageData数据并不是我们所需要的。
 
 那么，我们在对源图getImageData的时候，可以只获取我们需要的ImageData。
-<div class="runcode"><textarea class="runcode_text" id="runcode_20120117_canvas_4__2">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-	&lt;meta charset="utf-8"&gt;
-	&lt;title&gt;效率相关&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;canvas id="board" width="100" height="110"&gt;&lt;/canvas&gt;
-&lt;script type="text/javascript"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>效率相关</title>
+</head>
+<body>
+<canvas id="board" width="100" height="110"></canvas>
+<script type="text/javascript">
 function splinter(ctx,tempCtx, w, h){
 	var newData = [];
 	var round = 0; //统计循环次数
-	for(var y = 0; y &lt; h; y++){
+	for(var y = 0; y < h; y++){
 		newData[y] = [];
-		for(var x = 0; x &lt; w; x++){
+		for(var x = 0; x < w; x++){
 			newData[y][x] = tempCtx.getImageData(x, y, 1, 1); //分开获取所需要的ImageData
 			ctx.putImageData(newData[y][x], x*2, y*2);
 			round ++ ;
@@ -109,9 +112,10 @@ function demo(img){
 			alert("耗时：" + (new Date() - d) + "(ms)，\n共执行了" + func + "次的getImageData和putImageData");
 		}
 })()
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20120117_canvas_4__2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20120117_canvas_4__2')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```
 
 第二种做法虽然在循环的时候多运行了一个方法（共执行2750次的getImageData和putImageData方法），但因为操作的ImageData少了2750倍，所以在效率上比第一种方式高了很多。
 
@@ -119,23 +123,24 @@ function demo(img){
 根本不需要在循环中反复调用getImageData和putImageData。所以现在的关键点是get和put之间的如何对数据进行重排列。
 
 ImageData.data可以看做一个矩形矩阵，我们已知，它的序列号（n）与ImageData.width(w),及x轴序列号(x),y轴序列号（y）的关系是：n = ((y * w) + x) * 4; （其中的4表示了RGBA四个数据）。我们要的新的输出ImageData，其实是x加倍，y加倍，w加倍的一个新矩阵。那么新矩阵序号与原x,y,w的关系式应该是：t = ((y * 2 * w * 2) + x * 2) * 4;
-<div class="runcode"><textarea class="runcode_text" id="runcode_20120117_canvas_4__3">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-	&lt;meta charset="utf-8"&gt;
-	&lt;title&gt;效率相关&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;canvas id="board" width="100" height="110"&gt;&lt;/canvas&gt;
-&lt;script type="text/javascript"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>效率相关</title>
+</head>
+<body>
+<canvas id="board" width="100" height="110"></canvas>
+<script type="text/javascript">
 function splinter(ctx,imgPixels){
 	var round = 0; //统计循环次数
 	var n = 0,
 		w = imgPixels.width,
 		h = imgPixels.height,
 		newdata = ctx.createImageData(w*2, h*2);
-	for(var y = 0; y &lt; h; y++){
-		for(var x = 0; x &lt; w; x++){
+	for(var y = 0; y < h; y++){
+		for(var x = 0; x < w; x++){
 			n = ((y * w) + x) * 4; /* data序号n与x,y,w的关系 */
 			t = ((y * 2 * w * 2) + x * 2) * 4; /* 分割后，y,x,w都变大了一倍 */
 			newdata.data[t] =  imgPixels.data[n];
@@ -171,9 +176,10 @@ function demo(img){
 			alert("耗时：" + (new Date() - d) + "(ms)，\n共循环了" + func + "次,循环内不执行getImageData和putImageData方法");
 		}
 })()
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20120117_canvas_4__3')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20120117_canvas_4__3')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```
 
 第三种方法相对于第二种方法的效率提高了十几倍。第三种方法的关键点是找出新旧矩阵之间的关系，对于我们这一例来说还比较容易，复杂一点的，算法可就没这么简单了。
 

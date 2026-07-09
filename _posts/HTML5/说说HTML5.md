@@ -62,40 +62,47 @@ HTML5估计能在2012年之前成为W3C的候选推荐标准，不过在这之�
 除了ie系列浏览器外，其它大多数浏览器都能识别HTML5的那些新元素标签，可以对其进行style，这就意味着它们可以使用HTML5的新元素标签进行页面布局。
 但问题是ie系列浏览器是无法对其不承认的元素添加样式的，而缺少了IE的支持，大多数人都会束手束脚。解决这个问题的方法早已经了:HTML5 Shiv
 很简单:
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090904__HTML5_1">&lt;script&gt;
+```html runcode
+<script>
 document.createElement("元素名称")
-&lt;/script&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090904__HTML5_1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090904__HTML5_1')">Copy</button></div></div>
+</script>
+```
 创建文档元素。
 批量创建的方法:
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090904__HTML5_2">(function(){
-    if(!/*@cc_on!@*/0) return;    
-    var html5 = "abbr,article,aside,audio,bb,canvas,datagrid,datalist,details,dialog,event,source,figure,footer,hgroup,header,mark,menu,meter,nav,output,progress,section,time,video".split(',');   
-    for(var i = 0, len = html5.length; i &lt; len; i++ ) {       
-    document.createElement(html5[i]);  
+```html runcode
+(function(){
+    if(!/*@cc_on!@*/0) return;
+    var html5 = "abbr,article,aside,audio,bb,canvas,datagrid,datalist,details,dialog,event,source,figure,footer,hgroup,header,mark,menu,meter,nav,output,progress,section,time,video".split(',');
+    for(var i = 0, len = html5.length; i < len; i++ ) {
+    document.createElement(html5[i]);
     }
 })
-();</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090904__HTML5_2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090904__HTML5_2')">Copy</button></div></div>
+();
+```
 现在在IE里也可以对HTML5元素进行布局了。
 不过，在此之前，我们还需要对这些新元素定义基本的Display style,
 这个工作本来一般是由浏览器完成的，比如FireFox的html.css。
 现在只能自己对引进的HTML5元素进行定义了。
 那么哪些需要定义成display:block;哪些又是不需要呢？这个我们可以看下W3C是怎么定义的：display-types
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090904__HTML5_3">address, article, aside, blockquote, body, center, dd, dialog, dir,
+```html runcode
+address, article, aside, blockquote, body, center, dd, dialog, dir,
 div, dl, dt, figure, footer, form, h1, h2, h3, h4, h5, h6, header,
 hgroup, hr, html, legend, listing, menu, nav, ol, p, plaintext, pre,
-section, ul, xmp { display: block; }</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090904__HTML5_3')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090904__HTML5_3')">Copy</button></div></div>
+section, ul, xmp { display: block; }
+```
 
 刨除HTML老元素，以下这些元素:
 article,aside,dialog,figure,footer,header,hgroup,nav,section可以定义为{display:block;}
 这篇针对HTML 5 Reset Stylesheet的文章也可以参考下：http://html5doctor.com/html-5-reset-stylesheet/。文章在Eric的CSS Reset的基础上考虑HTML5新元素及W3C规范推荐下对元素进行了style reset。当然reset CSS本身就存在争议的，一般来说，reset CSS是你自己的style，很多东西都可以按你的意愿来定，当然不要太偏离W3C的元素设计本意。
 接下来，使用HTML5新元素进行布局就可以随心所欲了（还是悠着点好）。
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090904__HTML5_4">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
-&lt;title&gt;HTML5新标签试用&lt;/title&gt;
-&lt;style type="text/css"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HTML5新标签试用</title>
+<style type="text/css">
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,dialog,figure,footer,header,hgroup,menu,nav,section,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}
 body {font:normal 12px/140% Georgia,Tahoma,Verdana,Arial,sans-serif;}
 article,aside,dialog,figure,footer,header,hgroup,nav,section{display:block;}
@@ -131,83 +138,85 @@ article h2 a{color:#73a6bc}
 article h3,article p{margin:8px 0;}
 dialog time{padding-left:10px;font-style:italic;}
 footer{clear:both;text-align:center;sss}
-&lt;/style&gt;
-&lt;script type="text/javascript"&gt;
+</style>
+<script type="text/javascript">
 (function(){
 if(!/*@cc_on!@*/0) return;
 var html5 = "abbr,article,aside,audio,bb,canvas,datagrid,datalist,details,dialog,eventsource,figure,footer,hgroup,header,mark,menu,meter,nav,output,progress,section,time,video".split(',');
-for(var i = 0, len = html5.length; i &lt; len; i++ ) {document.createElement(html5[i]); }})();
-&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;header&gt;
-	&lt;h1&gt;&lt;a href="http://www.cssass.com" target="_blank"&gt;&lt;span&gt;CSSASS&lt;/span&gt;&lt;b&gt;CSSASS&lt;/b&gt;&lt;/a&gt;&lt;/h1&gt;
-&lt;/header&gt;
-&lt;div class="main"&gt;
-&lt;aside&gt;
-&lt;figure class="portrait"&gt;
-	&lt;img alt="A boy named oneboys said he is The One."  src="http://center.blueidea.com/data/avatar/000/36/17/22_avatar_middle.jpg" /&gt;
-	&lt;!-- &lt;legend&gt;ONEBOYS&lt;/legend&gt;  legend标签在html5之前是只允许作为fieldset的第一个子元素的，所以加在这里会出错。无法实现。我们还是用span来代替--&gt;
-	&lt;span&gt;ONEBOYS&lt;/span&gt;
-&lt;/figure&gt;
-&lt;nav&gt;
-	&lt;ul&gt;
-		&lt;li&gt;&lt;a href="#"&gt;首页&lt;/a&gt;&lt;/li&gt;
-		&lt;li&gt;&lt;a href="#"&gt;我的主页&lt;/a&gt;&lt;/li&gt;
-		&lt;li&gt;&lt;a href="#"&gt;个人资料&lt;/a&gt;&lt;/li&gt;
-		&lt;li&gt;&lt;a href="#"&gt;心情日志&lt;/a&gt;&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;/nav&gt;
-&lt;/aside&gt;
-&lt;section&gt;
-	&lt;article class="article1"&gt;
-        &lt;h2&gt;&lt;a href="http://html5doctor.com/html-5-reset-stylesheet/" target="_blank"&gt;HTML 5 Reset Stylesheet&lt;/a&gt;&lt;/h2&gt;
-        &lt;p&gt;We’ve had a number of people asking about templates, boilerplates and styling for HTML 5 so to give you all a helping hand and continue on from those basic building blocks that Remy talked about last week I’ve created a HTML 5 reset stylesheet for you to take away and use, edit, amend and update in your projects.&lt;/p&gt;
-		&lt;p&gt;Based on Eric Meyers CSS reset, I’ve made a few adjustments from Erics work that we’ll get to later but first here’s the file in full and we’ll then break it down step by step.&lt;/p&gt;
-		&lt;h3&gt;So what’s new then?&lt;/h3&gt;
-		&lt;p&gt;Well firstly, I’ve removed those elements that have been deprecated from the HTML 5 specification such as &amp;lt;acronym&amp;gt;, &amp;lt;font&amp;gt; and &amp;lt;big&amp;gt; (We’ll cover deprecated elements in more detail in another post). I’ve added in the the new HTML 5 elements to the reset, to remove any default padding, margin and borders. I’ve then added the explicit display:block declaration for those elements that are required to render as blocks.&lt;/p&gt;
-		&lt;p&gt;I’ve also removed the :focus part from Eric’s stylesheet. There are two reasons for this; the first is that by declaring outline:0 you remove the focus identifier for keyboard users. The second is that although Eric released his stylesheet in good faith that people would edit it and style :focus, they don’t. You will also notice that I’ve set defaults for &lt;ins&gt;&amp;lt;ins&amp;gt&lt;/ins&gt;; as I don’t think they got updated very often in Eric’s styles either.&lt;/p&gt;
-		&lt;p&gt;Another change from Eric’s stylsheet is that I decided to remove the lines that remove bullets from lists, the reason for this is purely personal. I tend to only add the list style back in when using Erics reset anyway. I have however included nav ul {list-style:none;} to at least remove those pesky bullets from your navigation. &lt;/p&gt;
-		&lt;h3&gt;Using attribute selectors&lt;/h3&gt;
-		&lt;p&gt;You’ll notice that I’ve included attribute selctors for &lt;abbr title="缩写：abbreviation"&gt;&amp;lt;abbr&amp;gt;&lt;/abbr&gt; and &lt;dfn&gt;&amp;lt;dfn&amp;gt;&lt;/dfn&gt;, the reason for this is I only want the style to appear if there is a title attribute to be displayed. The reason for this is primarly for accessibility. For example we use &amp;ltabbr&amp;gt regularly on this site but don’t always include a title attribute, that’s because it’s safe to assume all (no matter what device they are using) our readers know what HTML is, however we need to still include &amp;ltabbr&amp;gt to make sure screenreaders read the text as H-T-M-L rather than “HTML” which they struggle to pronounce.&lt;/p&gt;
-		&lt;h3&gt;What’s that bit about mark?&lt;/h3&gt;
-		&lt;p&gt;&lt;mark&gt;&amp;lt;mark&amp;gt&lt;/mark&gt;; is a new element introduced in HTML 5 used to (you guessed it) mark text in a document. The spec describes &lt;mark&gt;&amp;lt;mark&amp;gt&lt;/mark&gt;; as “The mark element represents a run of text in one document marked or highlighted for reference purposes, due to its relevance in another context.”. I anticipate this it will be used for highlighting phrases in search results and similar. We’ll have more on this in a post soon.&lt;/p&gt;
-		&lt;h3&gt;Where are all those application elements?&lt;/h3&gt;
-		&lt;p&gt;“Application elements” is the term I’ve used to loosely describe those elements such as &amp;lt;datagrid&amp;gt;, &amp;lt;datalist&amp;gt; etc. Basically those that you are likely to find in web apps rather than websites. These have been left out because at the current time hardly any of what was ‘Web Applications 1.0′ has been implemented by browsers. Also this reset is primarily aimed at those serving their pages as text/html not xml.&lt;/p&gt;
-		&lt;h3&gt;Go grab it&lt;/h3&gt;
-		&lt;p&gt;So that basically wraps it up, it’s released under a creative commons license and you can use it for both personal and commercial work. I thought I’d let Google take care of the hosting so go grab it from Google Code and let me know of any thoughts, queries or improvements you can offer.&lt;/p&gt;
-	&lt;/article&gt;
-&lt;/section&gt;
-&lt;/div&gt;
-&lt;footer&gt;Copyright © 2009 Cssass.com &lt;/footer&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090904__HTML5_4')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090904__HTML5_4')">Copy</button></div></div>
+for(var i = 0, len = html5.length; i < len; i++ ) {document.createElement(html5[i]); }})();
+</script>
+</head>
+<body>
+<header>
+	<h1><a href="http://www.cssass.com" target="_blank"><span>CSSASS</span><b>CSSASS</b></a></h1>
+</header>
+<div class="main">
+<aside>
+<figure class="portrait">
+	<img alt="A boy named oneboys said he is The One."  src="http://center.blueidea.com/data/avatar/000/36/17/22_avatar_middle.jpg" />
+	<!-- <legend>ONEBOYS</legend>  legend标签在html5之前是只允许作为fieldset的第一个子元素的，所以加在这里会出错。无法实现。我们还是用span来代替-->
+	<span>ONEBOYS</span>
+</figure>
+<nav>
+	<ul>
+		<li><a href="#">首页</a></li>
+		<li><a href="#">我的主页</a></li>
+		<li><a href="#">个人资料</a></li>
+		<li><a href="#">心情日志</a></li>
+	</ul>
+</nav>
+</aside>
+<section>
+	<article class="article1">
+        <h2><a href="http://html5doctor.com/html-5-reset-stylesheet/" target="_blank">HTML 5 Reset Stylesheet</a></h2>
+        <p>We’ve had a number of people asking about templates, boilerplates and styling for HTML 5 so to give you all a helping hand and continue on from those basic building blocks that Remy talked about last week I’ve created a HTML 5 reset stylesheet for you to take away and use, edit, amend and update in your projects.</p>
+		<p>Based on Eric Meyers CSS reset, I’ve made a few adjustments from Erics work that we’ll get to later but first here’s the file in full and we’ll then break it down step by step.</p>
+		<h3>So what’s new then?</h3>
+		<p>Well firstly, I’ve removed those elements that have been deprecated from the HTML 5 specification such as &lt;acronym&gt;, &lt;font&gt; and &lt;big&gt; (We’ll cover deprecated elements in more detail in another post). I’ve added in the the new HTML 5 elements to the reset, to remove any default padding, margin and borders. I’ve then added the explicit display:block declaration for those elements that are required to render as blocks.</p>
+		<p>I’ve also removed the :focus part from Eric’s stylesheet. There are two reasons for this; the first is that by declaring outline:0 you remove the focus identifier for keyboard users. The second is that although Eric released his stylesheet in good faith that people would edit it and style :focus, they don’t. You will also notice that I’ve set defaults for <ins>&lt;ins&gt</ins>; as I don’t think they got updated very often in Eric’s styles either.</p>
+		<p>Another change from Eric’s stylsheet is that I decided to remove the lines that remove bullets from lists, the reason for this is purely personal. I tend to only add the list style back in when using Erics reset anyway. I have however included nav ul {list-style:none;} to at least remove those pesky bullets from your navigation. </p>
+		<h3>Using attribute selectors</h3>
+		<p>You’ll notice that I’ve included attribute selctors for <abbr title="缩写：abbreviation">&lt;abbr&gt;</abbr> and <dfn>&lt;dfn&gt;</dfn>, the reason for this is I only want the style to appear if there is a title attribute to be displayed. The reason for this is primarly for accessibility. For example we use &ltabbr&gt regularly on this site but don’t always include a title attribute, that’s because it’s safe to assume all (no matter what device they are using) our readers know what HTML is, however we need to still include &ltabbr&gt to make sure screenreaders read the text as H-T-M-L rather than “HTML” which they struggle to pronounce.</p>
+		<h3>What’s that bit about mark?</h3>
+		<p><mark>&lt;mark&gt</mark>; is a new element introduced in HTML 5 used to (you guessed it) mark text in a document. The spec describes <mark>&lt;mark&gt</mark>; as “The mark element represents a run of text in one document marked or highlighted for reference purposes, due to its relevance in another context.”. I anticipate this it will be used for highlighting phrases in search results and similar. We’ll have more on this in a post soon.</p>
+		<h3>Where are all those application elements?</h3>
+		<p>“Application elements” is the term I’ve used to loosely describe those elements such as &lt;datagrid&gt;, &lt;datalist&gt; etc. Basically those that you are likely to find in web apps rather than websites. These have been left out because at the current time hardly any of what was ‘Web Applications 1.0′ has been implemented by browsers. Also this reset is primarily aimed at those serving their pages as text/html not xml.</p>
+		<h3>Go grab it</h3>
+		<p>So that basically wraps it up, it’s released under a creative commons license and you can use it for both personal and commercial work. I thought I’d let Google take care of the hosting so go grab it from Google Code and let me know of any thoughts, queries or improvements you can offer.</p>
+	</article>
+</section>
+</div>
+<footer>Copyright © 2009 Cssass.com </footer>
+</body>
+</html>
+```
 2. Drag & drop
 Drag & drop是浏览器支持度比较高的HTML5内容：
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090904__HTML5_5">&lt;!DOCTYPE HTML&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Drag and Drop&lt;/title&gt;
-  &lt;style&gt;
+```html runcode
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Drag and Drop</title>
+  <style>
    div {margin: 1em 2em; border: black solid;text-align: center;float:left;height: 9em; width: 12em; }
 	img {width:4em;float:left; }
 	p{clear:left;}
-  &lt;/style&gt;
- &lt;/head&gt;&lt;body&gt;
-  &lt;h1&gt;Drag and Drop&lt;/h1&gt;
-  &lt;div ondrop="drop(this, event)" ondragenter="return false" ondragover="return false"&gt;
-   &lt;p&gt;Good&lt;/p&gt;
-  &lt;/div&gt;
-  &lt;div ondrop="drop(this, event)" ondragenter="return false" ondragover="return false"&gt;
-   &lt;p&gt;Bad&lt;/p&gt;
-  &lt;/div&gt;
-  &lt;p&gt;
-   &lt;img src="http://www.baidu.com/img/baidu_logo.gif" id="baidu" alt="baidu" ondragstart="drag(this, event)"&gt;
-   &lt;img src="http://www.google.cn/intl/zh-CN/images/logo_cn.gif" id="google" alt="google" ondragstart="drag(this, event)"&gt;
-   &lt;img src="http://www.blueidea.com/img/common/logo.gif" id="blueidea" alt="blueidea" ondragstart="drag(this, event)"&gt;
-   &lt;img src="http://www.w3.org/Icons/w3c_main" id="W3C" alt="W3C" ondragstart="drag(this, event)"&gt;
-  &lt;/p&gt;
-  &lt;script&gt;
+  </style>
+ </head><body>
+  <h1>Drag and Drop</h1>
+  <div ondrop="drop(this, event)" ondragenter="return false" ondragover="return false">
+   <p>Good</p>
+  </div>
+  <div ondrop="drop(this, event)" ondragenter="return false" ondragover="return false">
+   <p>Bad</p>
+  </div>
+  <p>
+   <img src="http://www.baidu.com/img/baidu_logo.gif" id="baidu" alt="baidu" ondragstart="drag(this, event)">
+   <img src="http://www.google.cn/intl/zh-CN/images/logo_cn.gif" id="google" alt="google" ondragstart="drag(this, event)">
+   <img src="http://www.blueidea.com/img/common/logo.gif" id="blueidea" alt="blueidea" ondragstart="drag(this, event)">
+   <img src="http://www.w3.org/Icons/w3c_main" id="W3C" alt="W3C" ondragstart="drag(this, event)">
+  </p>
+  <script>
    function drag(target, e) {
      e.dataTransfer.setData('Text', target.id);
    }
@@ -216,9 +225,10 @@ Drag & drop是浏览器支持度比较高的HTML5内容：
      target.appendChild(document.getElementById(id));
      e.preventDefault();
    }
-  &lt;/script&gt;
- &lt;/body&gt;
- &lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090904__HTML5_5')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090904__HTML5_5')">Copy</button></div></div>
+  </script>
+ </body>
+ </html>
+```
 3. canvas
 我们先看一些canvas的示例：
 http://www.agustinfernandez.com.ar/proyectos/canvas/
@@ -236,22 +246,24 @@ http://excanvas.sourceforge.net/
 
 4. audio and video
 使用FireFox3.5看看下面这个Video Demo。
-<div class="runcode"><textarea class="runcode_text" id="runcode_20090904__HTML5_6">&lt;!DOCTYPE HTML&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;Video&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-	&lt;h1&gt;Video&lt;/h1&gt;
-	&lt;video src="http://v2v.cc/~j/theora_testsuite/320x240.ogg" controls autoplay &gt;
+```html runcode
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Video</title>
+</head>
+<body>
+	<h1>Video</h1>
+	<video src="http://v2v.cc/~j/theora_testsuite/320x240.ogg" controls autoplay >
 	   你的浏览器不支持
-	&lt;/video&gt;
-	&lt;script&gt;
+	</video>
+	<script>
 		var video = document.getElementsByTagName('video')[0];
-	&lt;/script&gt;
-	&lt;p&gt;&lt;input type="button" value="&amp;#x2588; &amp;#x2588;" onclick="if (video.paused) video.play(); else video.pause()"&gt;&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20090904__HTML5_6')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20090904__HTML5_6')">Copy</button></div></div>
+	</script>
+	<p><input type="button" value="&#x2588; &#x2588;" onclick="if (video.paused) video.play(); else video.pause()"></p>
+</body>
+</html>
+```
 
 我们没有引入flash播放器就能播放swf。
 

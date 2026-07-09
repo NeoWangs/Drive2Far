@@ -12,16 +12,18 @@ permalink: "/2011/01/21/用canvas绘制复杂图形/"
 ---
 
 在闪吧看见一棵树，移植到canvas+javascript里来。
-<div class="runcode"><textarea class="runcode_text" id="runcode_20110121__canvas__1">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;Tree&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;canvas id="pad" width='1000' height='500'&gt;&lt;a href='http://www.cssass.com'&gt;cssass.com&lt;/a&gt;提醒您：ie9以下用户请一边惭愧去吧&lt;/canvas&gt;
-&lt;/body&gt;
-&lt;script&gt;
+
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>Tree</title>
+</head>
+<body>
+<canvas id="pad" width='1000' height='500'><a href='http://www.cssass.com'>cssass.com</a>提醒您：ie9以下用户请一边惭愧去吧</canvas>
+</body>
+<script>
 var con=document.getElementById("pad").getContext('2d');
 	con.strokeStyle = '#000';
 	con.lineWidth=0.8;
@@ -32,7 +34,7 @@ function dw(ax, ay, bx, by) {
 	con.stroke();
 }
 function lzh(x, y, l, angle, n) {
-	if (n&gt;0) {
+	if (n>0) {
 		var a_l, a_r, x1, y1, x2, y2, y2_l;
 		x1 = x+0.5*l*Math.cos(angle*Math.PI/180);
 		y1 = y-0.5*l*Math.sin(angle*Math.PI/180);
@@ -51,21 +53,23 @@ function lzh(x, y, l, angle, n) {
 	}
 var rand=2-Math.random()*10
 lzh(300, 400, 100, 90, 6);
-&lt;/script&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20110121__canvas__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20110121__canvas__1')">Copy</button></div></div>
+</script>
+</html>
+```
 
 用setInterval让它动起来
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20110121__canvas__2">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;Tree&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;canvas id="pad" width='1000' height='500'&gt;&lt;a href='http://www.cssass.com'&gt;cssass.com&lt;/a&gt;提醒您：ie9以下用户请一边惭愧去吧&lt;/canvas&gt;
-&lt;/body&gt;
-&lt;script&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>Tree</title>
+</head>
+<body>
+<canvas id="pad" width='1000' height='500'><a href='http://www.cssass.com'>cssass.com</a>提醒您：ie9以下用户请一边惭愧去吧</canvas>
+</body>
+<script>
 var con=document.getElementById("pad").getContext('2d');
     con.strokeStyle = '#000';
     con.lineWidth=0.8;
@@ -73,7 +77,7 @@ var Tree=function(x, y, l, angle, n){
     var a=[],rand=0,dir=1,val;
     this.init=function(x, y, l, angle, n) {
         var that=this;
-        if (n&gt;0) {
+        if (n>0) {
             var a_l, a_r, x1, y1, x2, y2;
             x1 = x+0.5*l*Math.cos(angle*Math.PI/180);
             y1 = y-0.5*l*Math.sin(angle*Math.PI/180);
@@ -92,7 +96,7 @@ var Tree=function(x, y, l, angle, n){
     };
     this.run=function(){
 		con.clearRect(0,0,1000,500);
-        for(var i=0; i&lt;a.length; i++){
+        for(var i=0; i<a.length; i++){
             this.dw(a[i][0],a[i][1],a[i][2],a[i][3]);
         };
 		a=[];
@@ -110,7 +114,7 @@ var Tree=function(x, y, l, angle, n){
 	this.change=function(){
 		val=Math.random()*2;
 		rand+=dir*val;
-		if(rand&gt;10 || rand&lt;-2){dir=-dir;}
+		if(rand>10 || rand<-2){dir=-dir;}
 	};
 	this.init(x, y, l, angle, n);
 	this.run();
@@ -122,8 +126,9 @@ Tree.prototype.dw=function(ax, ay, bx, by){
     con.stroke();
 };
 new Tree(300, 400, 100, 90, 6).move();
-&lt;/script&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20110121__canvas__2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20110121__canvas__2')">Copy</button></div></div>
+</script>
+</html>
+```
 
 补充：
 除了setTimeout/setInterval这两个函数控制动画外。现在很多浏览器还提供了另一个函数requestAnimationFrame，这个函数接口所拥有的优势是：
@@ -162,21 +167,22 @@ new Tree(300, 400, 100, 90, 6).move();
 
 ```
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20110121__canvas__3">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;Tree&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;canvas id="pad" width='1000' height='500'&gt;&lt;a href='http://www.cssass.com'&gt;cssass.com&lt;/a&gt;提醒您：ie9以下用户请一边惭愧去吧&lt;/canvas&gt;
-&lt;/body&gt;
-&lt;script&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>Tree</title>
+</head>
+<body>
+<canvas id="pad" width='1000' height='500'><a href='http://www.cssass.com'>cssass.com</a>提醒您：ie9以下用户请一边惭愧去吧</canvas>
+</body>
+<script>
 (function() {
 	/* 兼容requestAnimationFrame */
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
-    for(var x = 0; x &lt; vendors.length &amp;&amp; !window.requestAnimationFrame; ++x) {
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
         window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
         window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
                                    || window[vendors[x]+'RequestCancelAnimationFrame'];
@@ -202,7 +208,7 @@ var Tree = function(x, y, l, angle, n){
     var a=[],rand=0,dir=1,val;
     this.init = function(x, y, l, angle, n) {
         var that = this;
-        if (n&gt;0) {
+        if (n>0) {
             var a_l, a_r, x1, y1, x2, y2;
             x1 = x+0.5*l*Math.cos(angle*Math.PI/180);
             y1 = y-0.5*l*Math.sin(angle*Math.PI/180);
@@ -221,7 +227,7 @@ var Tree = function(x, y, l, angle, n){
     };
     this.run=function(){
 		con.clearRect(0,0,1000,500);
-        for(var i=0; i&lt;a.length; i++){
+        for(var i=0; i<a.length; i++){
             this.dw(a[i][0],a[i][1],a[i][2],a[i][3]);
         };
 		a=[];
@@ -232,7 +238,7 @@ var Tree = function(x, y, l, angle, n){
 			delta;
 		(function _s(){
 			delta = new Date().getTime() - start;
-			if( delta &gt; 100 ){
+			if( delta > 100 ){
 				start = new Date().getTime();
 				that.change();
 				that.init(x, y, l, angle, n);
@@ -244,7 +250,7 @@ var Tree = function(x, y, l, angle, n){
 	this.change=function(){
 		val = Math.random()*2;
 		rand += dir*val;
-		if (rand &gt;10 || rand &lt; -2){ dir = -dir; }
+		if (rand >10 || rand < -2){ dir = -dir; }
 	};
 	this.init(x, y, l, angle, n);
 	this.run();
@@ -256,24 +262,27 @@ Tree.prototype.dw=function(ax, ay, bx, by){
     con.stroke();
 };
 new Tree(300, 400, 100, 90, 6).move();
-&lt;/script&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20110121__canvas__3')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20110121__canvas__3')">Copy</button></div></div>
+</script>
+</html>
+```
 
 再画几个图形：
-<div class="runcode"><textarea class="runcode_text" id="runcode_20110121__canvas__4">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;那些花儿&lt;/title&gt;
-&lt;style&gt;
+
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>那些花儿</title>
+<style>
 *{padding:0;margin:0;}
 html,body{height:100%;overflow:hidden;background:#333;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;canvas id="pad" width='2000' height='1000'&gt;&lt;a href='http://www.cssass.com'&gt;cssass.com&lt;/a&gt;提醒您：ie9以下用户请一边惭愧去吧&lt;/canvas&gt;
-&lt;/body&gt;
-&lt;script&gt;
+</style>
+</head>
+<body>
+<canvas id="pad" width='2000' height='1000'><a href='http://www.cssass.com'>cssass.com</a>提醒您：ie9以下用户请一边惭愧去吧</canvas>
+</body>
+<script>
 var con=document.getElementById("pad").getContext('2d');
 	con.strokeStyle = 'rgba(255,255,255,0.5)';
 	con.lineJoin = 'round';
@@ -284,14 +293,14 @@ function Tad(x,y,c){ /* 位置，角数 */
 	var xt=0, yt=0, angle=0 ,a=[];
 		r=360/c; //每只角分到的度数
 		var t=5; //转角
-		while(t&gt;1){
+		while(t>1){
 			if(r%t===0) break;
 			t--;
 		};
 		n=360/t; //总线条数
 		k=r/t; //每只角分到的线条数
 	this.init=function(){
-		if(a.length&lt;n){
+		if(a.length<n){
 			angle+=t;
 			a.unshift(angle);  //存储所有转角
 			this.init();
@@ -308,7 +317,7 @@ function Tad(x,y,c){ /* 位置，角数 */
 		o=c; //每次增加的线长.这个值可以自定义
 		mx=l+ k*o + 10; //直径(最大值)
 		con.clearRect(x-mx/2, y-mx/2, mx, mx);
-		for(var i=1; i&lt;a.length; i++) {
+		for(var i=1; i<a.length; i++) {
 			l+=o;
 			if(Math.floor(i%(k/2))===0) { //峰谷时反向
 				o=-o;
@@ -346,5 +355,6 @@ new Tad(200,200,4).move();
 new Tad(300,200,3).move();
 new Tad(400,200,2).move();
 new Tad(500,200,1).move();
-&lt;/script&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20110121__canvas__4')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20110121__canvas__4')">Copy</button></div></div>
+</script>
+</html>
+```

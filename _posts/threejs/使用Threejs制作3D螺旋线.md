@@ -14,12 +14,13 @@ permalink: "/2013/02/06/使用Threejs制作3D螺旋线/"
 
 做了一个3D螺旋线的生成器
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20130206__Threejs_3D__1">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8"&gt;
-&lt;title&gt;Threejs制作3D螺旋线&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Threejs制作3D螺旋线</title>
+<style>
 *{padding:0;margin:0;}
 body{background:#333;color:#fff;}
 .controlBar{position:absolute;}
@@ -27,35 +28,35 @@ body{background:#333;color:#fff;}
 #control b{position:relative;display:inline-block;width:120px;height:5px;font-size:0;line-height:0;background:#fff;border:1px solid #aaa;border-radius:2px;}
 #control i{position:absolute;cursor:pointer;top:-4px;left:50%;width:10px;height:10px;margin-left:-4px;border:1px solid #d3d3d3;background:#ececec;border-radius:2px;}
 #control i:hover{border:1px solid #999;background:#dcdcdc;}
-&lt;/style&gt;
-&lt;script src="/public/js/extend.js"&gt;&lt;/script&gt;
-&lt;script src="/public/js/three.min.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div class="controlBar"&gt;
-&lt;div id="control"&gt;
-	&lt;ul&gt;
-		&lt;li&gt;x:  &lt;b class='range'&gt;&lt;i data-value='85.2'&gt;&amp;nbsp;&lt;/i&gt;&lt;/b&gt;&lt;/li&gt;
-		&lt;li&gt;y:  &lt;b class='range'&gt;&lt;i data-value='205.2'&gt;&amp;nbsp;&lt;/i&gt;&lt;/b&gt;&lt;/li&gt;
-		&lt;li&gt;z:  &lt;b class='range'&gt;&lt;i data-value='-64.8'&gt;&amp;nbsp;&lt;/i&gt;&lt;/b&gt;&lt;/li&gt;
-	&lt;/ul&gt;
-	&lt;ul&gt;
-		&lt;li&gt;x:  &lt;b class='range'&gt;&lt;i data-value='60'&gt;&amp;nbsp;&lt;/i&gt;&lt;/b&gt;&lt;/li&gt;
-		&lt;li&gt;y:  &lt;b class='range'&gt;&lt;i data-value='-49.8'&gt;&amp;nbsp;&lt;/i&gt;&lt;/b&gt;&lt;/li&gt;
-		&lt;li&gt;z:  &lt;b class='range'&gt;&lt;i data-value='184.8'&gt;&amp;nbsp;&lt;/i&gt;&lt;/b&gt;&lt;/li&gt;
-	&lt;/ul&gt;
-	&lt;ul&gt;
-		&lt;li&gt;x:  &lt;b class='range'&gt;&lt;i data-value='225'&gt;&amp;nbsp;&lt;/i&gt;&lt;/b&gt;&lt;/li&gt;
-		&lt;li&gt;y:  &lt;b class='range'&gt;&lt;i data-value='-195'&gt;&amp;nbsp;&lt;/i&gt;&lt;/b&gt;&lt;/li&gt;
-		&lt;li&gt;z:  &lt;b class='range'&gt;&lt;i data-value='195'&gt;&amp;nbsp;&lt;/i&gt;&lt;/b&gt;&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;/div&gt;
-&lt;button onclick="Producer.createPoints()"&gt;增加操作点&lt;/button&gt;
-&lt;/div&gt;
-&lt;script&gt;
+</style>
+<script src="/public/js/extend.js"></script>
+<script src="/public/js/three.min.js"></script>
+</head>
+<body>
+<div class="controlBar">
+<div id="control">
+	<ul>
+		<li>x:  <b class='range'><i data-value='85.2'>&nbsp;</i></b></li>
+		<li>y:  <b class='range'><i data-value='205.2'>&nbsp;</i></b></li>
+		<li>z:  <b class='range'><i data-value='-64.8'>&nbsp;</i></b></li>
+	</ul>
+	<ul>
+		<li>x:  <b class='range'><i data-value='60'>&nbsp;</i></b></li>
+		<li>y:  <b class='range'><i data-value='-49.8'>&nbsp;</i></b></li>
+		<li>z:  <b class='range'><i data-value='184.8'>&nbsp;</i></b></li>
+	</ul>
+	<ul>
+		<li>x:  <b class='range'><i data-value='225'>&nbsp;</i></b></li>
+		<li>y:  <b class='range'><i data-value='-195'>&nbsp;</i></b></li>
+		<li>z:  <b class='range'><i data-value='195'>&nbsp;</i></b></li>
+	</ul>
+</div>
+<button onclick="Producer.createPoints()">增加操作点</button>
+</div>
+<script>
 var controlElm = $id("control"),
 	iElm = $tag("i", controlElm);
-for(var i = 0; i &lt; iElm.length; i++){
+for(var i = 0; i < iElm.length; i++){
 	iElm[i].style.left = (iElm[i].dataset['value'] - 0 + 300) * 100 /600 + "%";
 }
 var Producer = {
@@ -63,7 +64,7 @@ var Producer = {
 	getPoints : function(){
 		Producer.points = [];
 		var UL = $tag("UL", controlElm), item, jsondata;
-		for(var i = 0 ; i &lt;UL.length; i++){
+		for(var i = 0 ; i <UL.length; i++){
 			item =  $tag("i",UL[i]);
 			jsondata = {
 				x : item[0].dataset['value']-0,
@@ -86,7 +87,7 @@ var Producer = {
 		function mouseMove(){
 			var e = arguments[0] || window.event;
 			var len = tX + e.clientX - dx + 8, val;
-			if(len &gt;=0 &amp;&amp; len &lt;= 120){
+			if(len >=0 && len <= 120){
 				var rat = (len / 120) * 100;
 				o.style.left = rat+ "%";
 				val = l * Math.round((rat - 50)*10)/1000;
@@ -130,17 +131,17 @@ Spiral3D.prototype = {
 			geometry = new THREE.Geometry(),
 			material = new THREE.LineBasicMaterial( { color: 0xffffff, opacity: 1, linewidth: 1, vertexColors: THREE.VertexColors } );
 		//自动补全曲线点
-		for ( var i =0, position, l = Producer.points.length * 7; i &lt; l; i ++ ) {
+		for ( var i =0, position, l = Producer.points.length * 7; i < l; i ++ ) {
 			position = spline.getPoint( i/l );
 			geometry.vertices[ i ] = new THREE.Vector3( position.x, position.y, position.z );
 			geometry.colors[ i ] = new THREE.Color( 0x00ffff );
 			geometry.colors[ i ].setHSV( ( 100 + position.x ) / 400 * i/8, ( 200 + position.x ) / 400, ( 250 + position.x ) / 300);
 		}
 		//创建100条线
-		for(var line, i=0, l = 100 ; i&lt;l; i++){
+		for(var line, i=0, l = 100 ; i<l; i++){
 			line = new THREE.Line(geometry,  material);
 			line.position = {x: 0, y: 0, z: 0};
-			if(i &gt; 0) {
+			if(i > 0) {
 				line.rotation.y = Math.PI * 2 * (i/l);
 			}
 			this.scene.add( line ); //将显示对象加入场景
@@ -177,26 +178,28 @@ events.delegate(controlElm, 'i', 'mousedown',function(){
 		target = e.srcElement || e.target;
 	Producer.changePoints(target,e);
 });
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20130206__Threejs_3D__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20130206__Threejs_3D__1')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```
 
 配套做一个动画效果：
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20130206__Threejs_3D__2">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8"&gt;
-&lt;title&gt;Threejs 3D lines&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Threejs 3D lines</title>
+<style>
 *{padding:0;margin:0;}
 body{background:#333;color:#fff;overflow:hidden;}
-&lt;/style&gt;
-&lt;script src="/public/js/extend.js"&gt;&lt;/script&gt;
-&lt;script src="/blog/resource/threejs/three.min.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;script&gt;
+</style>
+<script src="/public/js/extend.js"></script>
+<script src="/blog/resource/threejs/three.min.js"></script>
+</head>
+<body>
+<script>
 var Producer = {
 	points : [{
 		x : 85.2,
@@ -243,11 +246,11 @@ var Producer = {
 	}],
 	changePoints : function(){
 		var points = Producer.points;
-		for(var i = 0 ; i &lt; points.length; i++){
+		for(var i = 0 ; i < points.length; i++){
 			item =  points[i];
-			if(item.x &lt; -250 || item.x &gt; 250) item.a = -item.a;
-			if(item.y &lt; -250 || item.y &gt; 250) item.b = -item.b;
-			if(item.z &lt; -250 || item.z &gt; 250) item.c = -item.c;
+			if(item.x < -250 || item.x > 250) item.a = -item.a;
+			if(item.y < -250 || item.y > 250) item.b = -item.b;
+			if(item.z < -250 || item.z > 250) item.c = -item.c;
 			item.x -= item.a,
 			item.y -= item.b,
 			item.z -= item.c
@@ -282,17 +285,17 @@ Spiral3D.prototype = {
 			geometry = new THREE.Geometry(),
 			material = new THREE.LineBasicMaterial( { color: 0xffffff, opacity: 1, linewidth: 1, vertexColors: THREE.VertexColors } );
 		//自动补全曲线点
-		for ( var i =0, position, l = Producer.points.length * 7; i &lt; l; i ++ ) {
+		for ( var i =0, position, l = Producer.points.length * 7; i < l; i ++ ) {
 			position = spline.getPoint( i/l );
 			geometry.vertices[ i ] = new THREE.Vector3( position.x, position.y, position.z );
 			geometry.colors[ i ] = new THREE.Color( 0x00ffff );
 			geometry.colors[ i ].setHSV( ( 100 + position.x ) / 400 * i/8, ( 200 + position.x ) / 400, ( 250 + position.x ) / 300);
 		}
 		//创建100条线
-		for(var line, i=0, l = 100 ; i&lt;l; i++){
+		for(var line, i=0, l = 100 ; i<l; i++){
 			line = new THREE.Line(geometry,  material);
 			line.position = {x: 0, y: 0, z: 0};
-			if(i &gt; 0) {
+			if(i > 0) {
 				line.rotation.y = Math.PI * 2 * (i/l);
 			}
 			this.scene.add( line ); //将显示对象加入场景
@@ -325,6 +328,7 @@ Spiral3D.prototype = {
 var spiralDemo = new Spiral3D();
 	spiralDemo.animate();
 setInterval(Producer.changePoints,50);
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20130206__Threejs_3D__2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20130206__Threejs_3D__2')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```

@@ -26,12 +26,13 @@ webkit.org的 3D Transforms (有Demo讲解)
 下面这个demo来自marcofolio.net：3d animation using pure CSS3
 以下是代码删减版
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20101116_CSS3_webkit_3D_Effect_1">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;cssass.com&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>cssass.com</title>
+<style>
 *{padding:0;margin:0;}
 body { background-color:#deddcd;}
 #movieposters { list-style:none; margin:100px;}
@@ -62,45 +63,47 @@ body { background-color:#deddcd;}
 .movieinfo p {padding:10px 0;}
 .movieinfo a { display:block; background:#7a3f3a; padding:3px 0; color:#eee; text-decoration:none; text-align:center; margin:0 auto;-webkit-border-radius:5px; }
 .movieinfo a:hover, .movieinfo a:focus { background-color:#6a191f; color:#fff; }
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;ul id="movieposters"&gt;
-	&lt;li&gt;
-		&lt;img src='http://www.cssass.com/blog/resource/avatar/avatar_m.jpg' width='200' /&gt;
-		&lt;div class="movieinfo"&gt;
-			&lt;h3&gt;Avatar 2&lt;/h3&gt;
-			&lt;p&gt;You like a baby&lt;/p&gt;
-			&lt;a href="http://www.cssass.com" title="I see you"&gt;More info&lt;/a&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li&gt;
-		&lt;img src='http://www.cssass.com/blog/resource/avatar/avatar_m.jpg' width='200' /&gt;
-		&lt;div class="movieinfo"&gt;
-			&lt;h3&gt;Avatar 2&lt;/h3&gt;
-			&lt;p&gt;You like a baby&lt;/p&gt;
-			&lt;a href="http://www.cssass.com" title="I see you"&gt;More info&lt;/a&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li&gt;
-		&lt;img src='http://www.cssass.com/blog/resource/avatar/avatar_m.jpg' width='200' /&gt;
-		&lt;div class="movieinfo"&gt;
-			&lt;h3&gt;Avatar 2&lt;/h3&gt;
-			&lt;p&gt;You like a baby&lt;/p&gt;
-			&lt;a href="http://www.cssass.com" title="I see you"&gt;More info&lt;/a&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20101116_CSS3_webkit_3D_Effect_1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20101116_CSS3_webkit_3D_Effect_1')">Copy</button></div></div>
+</style>
+</head>
+<body>
+<ul id="movieposters">
+	<li>
+		<img src='http://www.cssass.com/blog/resource/avatar/avatar_m.jpg' width='200' />
+		<div class="movieinfo">
+			<h3>Avatar 2</h3>
+			<p>You like a baby</p>
+			<a href="http://www.cssass.com" title="I see you">More info</a>
+		</div>
+	</li>
+	<li>
+		<img src='http://www.cssass.com/blog/resource/avatar/avatar_m.jpg' width='200' />
+		<div class="movieinfo">
+			<h3>Avatar 2</h3>
+			<p>You like a baby</p>
+			<a href="http://www.cssass.com" title="I see you">More info</a>
+		</div>
+	</li>
+	<li>
+		<img src='http://www.cssass.com/blog/resource/avatar/avatar_m.jpg' width='200' />
+		<div class="movieinfo">
+			<h3>Avatar 2</h3>
+			<p>You like a baby</p>
+			<a href="http://www.cssass.com" title="I see you">More info</a>
+		</div>
+	</li>
+</ul>
+</body>
+</html>
+```
 进一步删减
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20101116_CSS3_webkit_3D_Effect_2">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;cssass.com&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>cssass.com</title>
+<style>
 *{padding:0;margin:0;list-style:none; }
 body { background:#deddcd;margin:100px;}
 #movieposters li {float:left;
@@ -124,30 +127,32 @@ body { background:#deddcd;margin:100px;}
 	margin:-105px 0 0 40px;
 	-webkit-transform: rotateY(0deg);
 }
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;ul id="movieposters"&gt;
-	&lt;li&gt;
-		&lt;img src='http://www.cssass.com/blog/resource/avatar/avatar_m.jpg' width='200' /&gt;
-		&lt;div class="movieinfo"&gt;
+</style>
+</head>
+<body>
+<ul id="movieposters">
+	<li>
+		<img src='http://www.cssass.com/blog/resource/avatar/avatar_m.jpg' width='200' />
+		<div class="movieinfo">
 			Avatar 2
-		&lt;/div&gt;
-	&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20101116_CSS3_webkit_3D_Effect_2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20101116_CSS3_webkit_3D_Effect_2')">Copy</button></div></div>
+		</div>
+	</li>
+</ul>
+</body>
+</html>
+```
 上面的Demo中，我们一直没有应用-webkit-transform-style: preserve-3d;这个属性。
 事实上，上面的Demo仅仅是”伪3D”,只是我们面对的是屏幕这样一个2D平面，上面的Demo还无法区分出真3D和伪3D。
 
 我们再看看下面这个真3D的Demo——来自webkit.org
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20101116_CSS3_webkit_3D_Effect_3">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta charset="utf-8"&gt;
-  &lt;title&gt;Explaining transform-style&lt;/title&gt;
-  &lt;style&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Explaining transform-style</title>
+  <style>
     #container {
       position: relative;
       height: 300px;
@@ -172,7 +177,7 @@ body { background:#deddcd;margin:100px;}
       from { -webkit-transform: rotateY(0); }
       to   { -webkit-transform: rotateY(360deg); }
     }
-    #parent &gt; div {
+    #parent > div {
       position: absolute;
       top: 40px;
       left: 40px;
@@ -181,38 +186,40 @@ body { background:#deddcd;margin:100px;}
       padding: 10px;
       -webkit-box-sizing: border-box;
     }
-    #parent &gt; :first-child {
+    #parent > :first-child {
       background-color: #49DC93;
       -webkit-transform: translateZ(-100px) rotateY(45deg);
     }
-    #parent &gt; :last-child {
+    #parent > :last-child {
       background-color: #FF6;
       -webkit-transform: translateZ(50px) rotateX(20deg);
       -webkit-transform-origin: 50% top;
     }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;div id="container"&gt;
-    &lt;div id="parent"&gt;
-      &lt;div&gt;-webkit-transform: translateZ(-100px) rotateY(45deg);&lt;/div&gt;
-      &lt;div&gt;-webkit-transform: translateZ(50px) rotateX(20deg);&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20101116_CSS3_webkit_3D_Effect_3')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20101116_CSS3_webkit_3D_Effect_3')">Copy</button></div></div>
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="parent">
+      <div>-webkit-transform: translateZ(-100px) rotateY(45deg);</div>
+      <div>-webkit-transform: translateZ(50px) rotateX(20deg);</div>
+    </div>
+  </div>
+</body>
+</html>
+```
 hover状态下transform-style值是flat;未hover状态下是preserve-3d —— 两者的效果差异一目了然。
 在上面的Demo中，不仅应用了transform属性，还使用了webkit css中另一个很牛的属性——animation
 （而我们最前面的Demo也使用了webkit css中第三个很牛的属性——transition）
 
 参照上面的Demo，我们对原demo也做个修改，
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20101116_CSS3_webkit_3D_Effect_4">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;cssass.com&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>cssass.com</title>
+<style>
 *{padding:0;margin:0;list-style:none; }
 body { background:#deddcd;margin:100px;}
 #movieposters{
@@ -249,22 +256,23 @@ body { background:#deddcd;margin:100px;}
 	margin:-105px 0 0 40px;
 	-webkit-transform: rotateY(0deg);
 }
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;ul id="movieposters"&gt;
-	&lt;li class='first'&gt;
-		&lt;img src='http://www.cssass.com/blog/resource/avatar/avatar_m.jpg' width='200' /&gt;
-		&lt;div class="movieinfo"&gt;
+</style>
+</head>
+<body>
+<ul id="movieposters">
+	<li class='first'>
+		<img src='http://www.cssass.com/blog/resource/avatar/avatar_m.jpg' width='200' />
+		<div class="movieinfo">
 			Avatar 2
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class='second'&gt;
-		&lt;img src='http://www.cssass.com/blog/resource/avatar/avatar_m.jpg' width='200' /&gt;
-		&lt;div class="movieinfo"&gt;
+		</div>
+	</li>
+	<li class='second'>
+		<img src='http://www.cssass.com/blog/resource/avatar/avatar_m.jpg' width='200' />
+		<div class="movieinfo">
 			Avatar 2
-		&lt;/div&gt;
-	&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20101116_CSS3_webkit_3D_Effect_4')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20101116_CSS3_webkit_3D_Effect_4')">Copy</button></div></div>
+		</div>
+	</li>
+</ul>
+</body>
+</html>
+```

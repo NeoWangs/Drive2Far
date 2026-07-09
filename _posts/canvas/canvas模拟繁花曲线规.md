@@ -13,12 +13,13 @@ permalink: "/2012/12/05/canvas模拟繁花曲线规/"
 
 不算难，就是几个相对运动。
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20121205_canvas__1">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;繁花曲线规&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>繁花曲线规</title>
+<style>
 *{padding:0;margin:0;}
 body{background:#eee;overflow-x:hidden;}
 #operationBar{position: fixed;z-index:10000;bottom:0;width:100%;text-align:center;background:#FBFDFE;border-top:2px solid #CC0F16;padding:5px 0;}
@@ -28,24 +29,24 @@ body{background:#eee;overflow-x:hidden;}
 .dialog_close{text-decoration:none;color:#fff; display:inline-block;width:15px;height:15px;font-size:12px;text-align:center;line-height:15px;font-family:'Comic Sans MS';}
 .dialog_Head .dialog_Opts{position:absolute;right:5px;top:0;height:21px;cursor:default;}
 .dialog_Body{overflow:auto;}
-&lt;/style&gt;
-&lt;script src="/public/js/extend.js"&gt;&lt;/script&gt;
-&lt;script src="/public/js/litewin.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div id="operationBar"&gt;
-	&lt;label&gt;&lt;input class="opt" id="showCricle" type="checkbox" /&gt;圈&lt;/label&gt;
-	&lt;label&gt;&lt;input class="opt" id="showLine" type="checkbox" checked/&gt;线&lt;/label&gt;
-	&lt;label&gt;&lt;input class="opt" id="showPoint" type="checkbox" /&gt;点&lt;/label&gt;
-	&lt;label&gt;&lt;input class="opt" id="showColor" type="checkbox" checked /&gt;变色&lt;/label&gt;
-	&lt;label&gt;&lt;input class="opt" id="isRefresh" type="checkbox" /&gt;刷新&lt;/label&gt;
-	&lt;label&gt;外圈半径:&lt;input class="opt optText" id="bigRadius" type="text" value="133" /&gt;&lt;/label&gt;
-	&lt;label&gt;内圈半径:&lt;input class="opt optText" id="smallRadius" type="text" value="140" /&gt;&lt;/label&gt;
-	&lt;label&gt;线长:&lt;input class="opt optText" id="lineLength" type="text" value="123" /&gt;&lt;/label&gt;
-	&lt;label&gt;&lt;input id="runBtn" type="button" value="新建"/&gt;&lt;/label&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;script&gt;
+</style>
+<script src="/public/js/extend.js"></script>
+<script src="/public/js/litewin.js"></script>
+</head>
+<body>
+<div id="operationBar">
+	<label><input class="opt" id="showCricle" type="checkbox" />圈</label>
+	<label><input class="opt" id="showLine" type="checkbox" checked/>线</label>
+	<label><input class="opt" id="showPoint" type="checkbox" />点</label>
+	<label><input class="opt" id="showColor" type="checkbox" checked />变色</label>
+	<label><input class="opt" id="isRefresh" type="checkbox" />刷新</label>
+	<label>外圈半径:<input class="opt optText" id="bigRadius" type="text" value="133" /></label>
+	<label>内圈半径:<input class="opt optText" id="smallRadius" type="text" value="140" /></label>
+	<label>线长:<input class="opt optText" id="lineLength" type="text" value="123" /></label>
+	<label><input id="runBtn" type="button" value="新建"/></label>
+</div>
+</body>
+<script>
 function Toy(options){
 	this.setOptions(options);
 	this.createPad();
@@ -67,11 +68,11 @@ Toy.prototype = {
 		extendCopy(options || {}, this.options);
 		//实际占用区域半径的计算
 		var delta = 0;
-		if(this.options.R &gt; this.options.r){
-			delta = (this.options.r &gt; this.options.l) ? 0 : this.options.l - this.options.r;
+		if(this.options.R > this.options.r){
+			delta = (this.options.r > this.options.l) ? 0 : this.options.l - this.options.r;
 			this.radius = this.options.R + delta;
 		}else{
-			delta = (this.options.r &gt; this.options.l) ? this.options.r - this.options.R : this.options.l - this.options.R;
+			delta = (this.options.r > this.options.l) ? this.options.r - this.options.R : this.options.l - this.options.R;
 			this.radius = this.options.r + delta;
 		}
 		this.radius += 10;
@@ -85,43 +86,43 @@ Toy.prototype = {
 		this.colorValue = "rgba("+this.color.r+","+this.color.g+","+this.color.b+","+this.color.a+")";
 		this.angle = 0;
 		this.timePlay = null;
-  	},
-  	changeColor : function(){
-  		//颜色变换模式1
-  		this.color.r += this.v;
-  		if(this.color.r &gt; 255){
-  			this.color.r = 0;
-  			this.color.g += this.v;
-  		}
-  		if(this.color.g &gt; 255){
-  			this.color.r = 0;
-  			this.color.g = 0;
-  			this.color.b += this.v;
-  		}
-  		if(this.color.b &gt; 255){
-  			this.color.r = 0;
-  			this.color.g = 0;
-  			this.color.b = 0;
-  		}
-  		this.colorValue = "rgba("+this.color.r+","+this.color.g+","+this.color.b+","+this.color.a+")";
-  	},
-  	changeColor2 : function(){
-  		//颜色变换模式2
-  		if(Toy.isIn(this.color.r + this.v, -1, 255)){
-  			this.color.r += this.v;
-  		}else{
-  			if(Toy.isIn(this.color.g + this.v, -1, 255)){
-  				this.color.g += this.v;
-  			}else{
-  				if(Toy.isIn(this.color.b + this.v, -1, 255)){
-  					this.color.b += this.v;
-  				}else{
-  					this.v = -this.v;
-  				}
-  			}
-  		}
-  		this.colorValue = "rgba("+this.color.r+","+this.color.g+","+this.color.b+","+this.color.a+")";
-  	},
+	},
+	changeColor : function(){
+		//颜色变换模式1
+		this.color.r += this.v;
+		if(this.color.r > 255){
+			this.color.r = 0;
+			this.color.g += this.v;
+		}
+		if(this.color.g > 255){
+			this.color.r = 0;
+			this.color.g = 0;
+			this.color.b += this.v;
+		}
+		if(this.color.b > 255){
+			this.color.r = 0;
+			this.color.g = 0;
+			this.color.b = 0;
+		}
+		this.colorValue = "rgba("+this.color.r+","+this.color.g+","+this.color.b+","+this.color.a+")";
+	},
+	changeColor2 : function(){
+		//颜色变换模式2
+		if(Toy.isIn(this.color.r + this.v, -1, 255)){
+			this.color.r += this.v;
+		}else{
+			if(Toy.isIn(this.color.g + this.v, -1, 255)){
+				this.color.g += this.v;
+			}else{
+				if(Toy.isIn(this.color.b + this.v, -1, 255)){
+					this.color.b += this.v;
+				}else{
+					this.v = -this.v;
+				}
+			}
+		}
+		this.colorValue = "rgba("+this.color.r+","+this.color.g+","+this.color.b+","+this.color.a+")";
+	},
 	createPad : function(isReset){
 				if(!isReset){
 					this.pad = document.createElement("canvas");
@@ -141,7 +142,7 @@ Toy.prototype = {
 						scrollT = document.body.scrollTop || document.documentElement.scrollTop;
 					if(lastOne){
 						var rect = lastOne.getBoundingClientRect();
-						if (rect.right &gt; document.documentElement.offsetWidth - lastOne.offsetWidth) {
+						if (rect.right > document.documentElement.offsetWidth - lastOne.offsetWidth) {
 							pos = [rect.bottom + 10 + scrollT, 0];
 						}else{
 							pos = [rect.top + scrollT, rect.right+ 10];
@@ -207,7 +208,7 @@ Toy.prototype = {
 					that.clear(count == 0).draw();
 					count ++;
 					that.timePlay = setTimeout(_s,50);
-					if(that.options.count &lt; count) {
+					if(that.options.count < count) {
 						clearTimeout(that.timePlay)
 					};
 				}
@@ -237,7 +238,7 @@ Toy.prototype = {
 	}
 }
 Toy.isIn = function(v,min,max){
-	return (v &gt; min &amp;&amp; v &lt; max)
+	return (v > min && v < max)
 };
 Toy.t = new Date();
 function getOpt(){
@@ -259,7 +260,7 @@ window.onload = function(){
 	temp3 = new Toy({R:103,r:40,l:50}).move(),
 	temp4 = new Toy({R:113,r:140,l:123}).move();
 	var inputs = $class("opt");
-	for (var i = inputs.length - 1; i &gt;= 0; i--) {
+	for (var i = inputs.length - 1; i >= 0; i--) {
 		inputs[i].onchange = function(){
 			temp1.reset(getOpt());
 		}
@@ -268,5 +269,6 @@ window.onload = function(){
 		new Toy(getOpt()).move();
 	});
 }
-&lt;/script&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20121205_canvas__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20121205_canvas__1')">Copy</button></div></div>
+</script>
+</html>
+```

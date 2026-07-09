@@ -22,19 +22,20 @@ permalink: "/2012/01/12/canvas的像素级操作——3-使用卷积矩阵/"
 
 应用卷积矩阵实现特效:
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20120112_canvas_3__1">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-	&lt;meta charset="utf-8"&gt;
-	&lt;title&gt;利用卷积矩阵实现特效&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;canvas id="canvas1" width="200" height="200" title="浮雕效果"&gt;&lt;/canvas&gt;
-&lt;canvas id="canvas2" width="200" height="200" title="边缘检测"&gt;&lt;/canvas&gt;
-&lt;canvas id="canvas3" width="200" height="200" title="锐化"&gt;&lt;/canvas&gt;
-&lt;canvas id="canvas4" width="200" height="200" title="基本模糊"&gt;&lt;/canvas&gt;
-&lt;canvas id="canvas5" width="200" height="200" &gt;&lt;/canvas&gt;
-&lt;script type="text/javascript"&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>利用卷积矩阵实现特效</title>
+</head>
+<body>
+<canvas id="canvas1" width="200" height="200" title="浮雕效果"></canvas>
+<canvas id="canvas2" width="200" height="200" title="边缘检测"></canvas>
+<canvas id="canvas3" width="200" height="200" title="锐化"></canvas>
+<canvas id="canvas4" width="200" height="200" title="基本模糊"></canvas>
+<canvas id="canvas5" width="200" height="200" ></canvas>
+<script type="text/javascript">
 function convolution(imgPixels, matrix, divisor, offset){
 	/* 卷积矩阵应用函数 */
     var w = imgPixels.width,
@@ -43,9 +44,9 @@ function convolution(imgPixels, matrix, divisor, offset){
 	var canvas = document.createElement('canvas'),
 		ctx = canvas.getContext('2d'),
 		newImgPixels = ctx.createImageData(w,h);
-	for (var y = 1; y &lt; h-1; y++) {
-			for (var x = 1; x &lt; w-1; x++) {
-				for (var c = 0; c &lt; 3; c++) {
+	for (var y = 1; y < h-1; y++) {
+			for (var x = 1; x < w-1; x++) {
+				for (var c = 0; c < 3; c++) {
 					/* RGB通道 */
 					var i = (y*w + x)*4 + c;
 					newImgPixels.data[i]=(matrix[0]*d[i-(w+1)*4] + matrix[1]*d[i-w*4] + matrix[2]*d[i-(w-1)*4]
@@ -110,7 +111,7 @@ function convolution(imgPixels, matrix, divisor, offset){
 		context.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
 	}
 	var canvas = document.getElementsByTagName('canvas');
-	for(var i = 0, l = canvas.length; i &lt; l; i++ ){
+	for(var i = 0, l = canvas.length; i < l; i++ ){
 		var loadObj = new Load(canvas[i]);
 		(function(obj){
 			obj.loading();
@@ -145,7 +146,7 @@ function Load(canvas){
 	var draw = function(){
 		drawCtx.fillRect(0,0, drawPad.width ,drawPad.height);
 		drawCtx.rotate(Math.PI*2/spokes);
-		for (var i=0; i&lt;spokes; i++) {
+		for (var i=0; i<spokes; i++) {
 			drawCtx.rotate(Math.PI*2/spokes);
 			drawCtx.beginPath();
 			drawCtx.moveTo(0,8);
@@ -162,9 +163,10 @@ function Load(canvas){
 		backCtx.clearRect((backWidth - drawPad.width)/2, (backHeight - drawPad.height)/2, drawPad.width ,drawPad.height);
 	}
 }
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20120112_canvas_3__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20120112_canvas_3__1')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```
 
 上面demo中卷积的实现函数来自于在HTML 5 的 Canvas 中应用卷积矩阵对图像处理
 

@@ -56,18 +56,19 @@ y: y
 
 我们应用一下：下面是一个3D球
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20110224__canvas_2D_API_3D_3D__1">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;2D canvas API下的3D效果&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>2D canvas API下的3D效果</title>
+<style>
 body{background:#cbe846;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body title='拖到鼠标'&gt;
-&lt;canvas id="pad" width="800" height="800"&gt;&lt;a href='http://www.cssass.com'&gt;cssass.com&lt;/a&gt;提醒您：本例使用HTML5的canvas标签。ie9以下用户请一边惭愧去吧&lt;/canvas&gt;
-&lt;script type="text/javascript" &gt;
+</style>
+</head>
+<body title='拖到鼠标'>
+<canvas id="pad" width="800" height="800"><a href='http://www.cssass.com'>cssass.com</a>提醒您：本例使用HTML5的canvas标签。ie9以下用户请一边惭愧去吧</canvas>
+<script type="text/javascript" >
 	function g(e){
 		return document.getElementById(e);
 	}
@@ -83,7 +84,7 @@ body{background:#cbe846;}
 	/* 投影算法（from: www.benjoffe.com） */
 	function iso(x,y,z){
 		var dist = Math.sqrt(x*x+y*y);
-		var angle = (x==0 &amp;&amp; y==0) ? 0 : Math.atan(y/x) + theta + ((x&lt;0)? Math.PI : 0);
+		var angle = (x==0 && y==0) ? 0 : Math.atan(y/x) + theta + ((x<0)? Math.PI : 0);
 		x=Math.cos(angle)*dist;
 		y=-Math.sin(angle)*dist;
 		var fact = (y*Math.cos(eleva) + z*Math.sin(eleva)+8)/8;
@@ -100,7 +101,7 @@ body{background:#cbe846;}
 		var x,y,z;
 		var t;
 		z=-r;
-		while(z&lt;r){
+		while(z<r){
 			x=-Math.sqrt(r*r-z*z);
 			y=0;
 			t=1;
@@ -135,17 +136,18 @@ body{background:#cbe846;}
 		document.onmousemove=function(e){
 				theta -= (x0 - (x0=e.clientX))/100;
 				eleva -= (y0 - (y0=e.clientY))/100;
-				theta%=Math.PI*2; if (theta&lt;0) theta+=Math.PI*2;
-				eleva%=Math.PI*2; if (eleva&lt;0) eleva+=Math.PI*2;
+				theta%=Math.PI*2; if (theta<0) theta+=Math.PI*2;
+				eleva%=Math.PI*2; if (eleva<0) eleva+=Math.PI*2;
 				preview();
 		}
 		document.onmouseup=function(e){
 			document.onmousemove=null;
 		}
 	};
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20110224__canvas_2D_API_3D_3D__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20110224__canvas_2D_API_3D_3D__1')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```
 
 以上代码是对球面的方程 x^2+y^2+z^2=r^2进行求解，将解（x,y,z）代入iso方法，最后根据输出二维坐标进行绘图。
 对于这个球面方程的解法，也是各有各的写法。
@@ -155,19 +157,20 @@ body{background:#cbe846;}
 我相信你也很可能知道网上还有一个3D版是心形函数：(x^2 + (9/4)y^2 + z^2 – 1)^3 – x^2*z^3 – (9/80)y^2*z^3 = 0
 下面我将使用上面的iso方法在canvas中将其绘制出来，你可以拖到鼠标来看3D效果。
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20110224__canvas_2D_API_3D_3D__2">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;3D LOVE in canvas&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>3D LOVE in canvas</title>
+<style>
 body{background:#efd5e2;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body  title='拖到鼠标'&gt;
-&lt;canvas id="pad" width="800" height="800" &gt;&lt;a href='http://www.cssass.com'&gt;cssass.com&lt;/a&gt;提醒您：本例使用了HTML5的canvas标签。ie9以下用户请一边惭愧去吧&lt;/canvas&gt;
-&lt;/body&gt;
-&lt;script type="text/javascript" &gt;
+</style>
+</head>
+<body  title='拖到鼠标'>
+<canvas id="pad" width="800" height="800" ><a href='http://www.cssass.com'>cssass.com</a>提醒您：本例使用了HTML5的canvas标签。ie9以下用户请一边惭愧去吧</canvas>
+</body>
+<script type="text/javascript" >
 	function g(e){
 		return document.getElementById(e);
 	}
@@ -180,7 +183,7 @@ body{background:#efd5e2;}
 	/* 将三维投射到二维（三维直角坐标系转平面直角坐标系） */
 	function iso(x,y,z){
 		var dist = Math.sqrt(x*x+y*y);
-		var angle = (x==0 &amp;&amp; y==0) ? 0 : Math.atan(y/x) + theta + ((x&lt;0)? Math.PI : 0);
+		var angle = (x==0 && y==0) ? 0 : Math.atan(y/x) + theta + ((x<0)? Math.PI : 0);
 		x=Math.cos(angle)*dist;
 		y=-Math.sin(angle)*dist;
 		var fact = (y*Math.cos(eleva) + z*Math.sin(eleva)+8)/8;
@@ -192,14 +195,14 @@ body{background:#efd5e2;}
 			y: y
 		};
 	}
-	/* 方程式: (x^2 + (9/4)y^2 + z^2 - 1)^3 - x^2*z^3 - (9/80)y^2*z^3 &lt; 0 */
+	/* 方程式: (x^2 + (9/4)y^2 + z^2 - 1)^3 - x^2*z^3 - (9/80)y^2*z^3 < 0 */
 	function love(){
 		var x,y,z,m,t=3;
-		for(z=-3;z&lt;=3;){
-			for(y=-3;y&lt;=3;){
-				for(x=-3;x&lt;=3;){
+		for(z=-3;z<=3;){
+			for(y=-3;y<=3;){
+				for(x=-3;x<=3;){
 					m=(x*x + (9/4)*y*y + z*z - 1)*(x*x + (9/4)*y*y + z*z - 1)*(x*x + (9/4)*y*y + z*z - 1) - x*x*z*z*z - (9/80)*y*y*z*z*z;
-					if(m&lt;0){
+					if(m<0){
 						co = iso(x,y,z);
 						ctx.strokeRect(co.x, co.y,0.02,0.02);
 						ctx.closePath();
@@ -228,16 +231,17 @@ body{background:#efd5e2;}
 		document.onmousemove=function(e){
 				theta -= (x0 - (x0=e.clientX))/100;
 				eleva -= (y0 - (y0=e.clientY))/100;
-				theta%=Math.PI*2; if (theta&lt;0) theta+=Math.PI*2;
-				eleva%=Math.PI*2; if (eleva&lt;0) eleva+=Math.PI*2;
+				theta%=Math.PI*2; if (theta<0) theta+=Math.PI*2;
+				eleva%=Math.PI*2; if (eleva<0) eleva+=Math.PI*2;
 				preview();
 		}
 		document.onmouseup=function(e){
 			document.onmousemove=null;
 		}
 	}
-&lt;/script&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20110224__canvas_2D_API_3D_3D__2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20110224__canvas_2D_API_3D_3D__2')">Copy</button></div></div>
+</script>
+</html>
+```
 
 我们知道，三维空间下的坐标系不止直角坐标一种，还有 圆柱坐标系，球坐标系等等。
 下面我们将iso方法转换一下，是输入使用球坐标系值（θ,Φ,r）——转角，仰角，球半径。
@@ -275,24 +279,25 @@ y: y
 
 下面是我们使用球坐标系绘制的三维图形（三维投射到二维的图形）
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20110224__canvas_2D_API_3D_3D__3">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;球坐标系投影到二维直角坐标系&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>球坐标系投影到二维直角坐标系</title>
+<style>
 	body{background:#666;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;canvas id="pad" width="800" height="800"&gt;&lt;a href='http://www.cssass.com'&gt;cssass.com&lt;/a&gt;提醒您：本例使用了HTML5的canvas标签。ie9以下用户请一边惭愧去吧&lt;/canvas&gt;
-&lt;/body&gt;
-&lt;script type="text/javascript" &gt;
+</style>
+</head>
+<body>
+<canvas id="pad" width="800" height="800"><a href='http://www.cssass.com'>cssass.com</a>提醒您：本例使用了HTML5的canvas标签。ie9以下用户请一边惭愧去吧</canvas>
+</body>
+<script type="text/javascript" >
 	function g(e){
 		return document.getElementById(e);
 	}
 	var random=function(){
-		return (Math.random()*10&gt;&gt;0)/10;
+		return (Math.random()*10>>0)/10;
 	}
 	var ctx = g('pad').getContext('2d');
 		ctx.scale(100,100);
@@ -346,9 +351,9 @@ y: y
 	}
 	Ball.prototype.sphere=function(){
 		var a,b;
-		for(a=0; a&lt;2*Math.PI; a+=Math.PI/12){
-			for(b=0; b&lt;2*Math.PI; b+=Math.PI/12){
-				if(b ==0 || b*100&gt;&gt;0 == Math.PI*100&gt;&gt;0 || b*100&gt;&gt;0 == 2*Math.PI*100&gt;&gt;0)  continue; /* 排除一些仰角(接近)为0/PI/2PI的点.  */
+		for(a=0; a<2*Math.PI; a+=Math.PI/12){
+			for(b=0; b<2*Math.PI; b+=Math.PI/12){
+				if(b ==0 || b*100>>0 == Math.PI*100>>0 || b*100>>0 == 2*Math.PI*100>>0)  continue; /* 排除一些仰角(接近)为0/PI/2PI的点.  */
 				this.co = this.iso(0,0,0);
 				ctx.moveTo(this.co.x, this.co.y);
 				this.co = this.iso(a,b,this.radius);
@@ -362,10 +367,11 @@ y: y
 			that.theta+=random()/20;
 			that.eleva+=random()/20;
 			that.radius+=(random()/10-0.05);
-			if(that.radius&lt;0.5 || that.radius&gt;2) that.radius=1;
+			if(that.radius<0.5 || that.radius>2) that.radius=1;
 			that.preview();
 		},100)
 	};
 	new Ball(2,2,1).fluc();
-&lt;/script&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20110224__canvas_2D_API_3D_3D__3')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20110224__canvas_2D_API_3D_3D__3')">Copy</button></div></div>
+</script>
+</html>
+```

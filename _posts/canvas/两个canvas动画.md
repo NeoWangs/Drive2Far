@@ -16,12 +16,13 @@ permalink: "/2010/12/27/两个canvas动画/"
 这个小玩意的难度在于，里面的所有东西都不是图片，而是用canvas写的，之前写的贝塞尔曲线的可视化操作实现倒是帮了大忙，不过据说AI已有插件直接导出canvas绘图代码了，那我的手写代码的生产力就太落后了。
 
 支持的浏览器包括ie9,firefox,chrome,safari。在opera下有个bug,暂时无法修复。
-<div class="runcode"><textarea class="runcode_text" id="runcode_20101227__canvas__1">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;IE9 Pinwheel&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>IE9 Pinwheel</title>
+<style>
 /*
 *	IE9大风车
 *	author: ONEBOYS
@@ -33,13 +34,13 @@ html,body{height:100%;overflow:hidden;text-align:center;}
 #middle{position:relative;z-index:2;width:750px;margin:0 auto;}
 #middle canvas{position:relative;}
 #bg{position:absolute;z-index:1;top:0;left:0;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body &gt;
-	&lt;canvas id="bg"&gt;&lt;/canvas&gt;
-	&lt;div id='middle'&gt;&lt;/div&gt;
-&lt;/body&gt;
-&lt;script type="text/javascript"&gt;
+</style>
+</head>
+<body >
+	<canvas id="bg"></canvas>
+	<div id='middle'></div>
+</body>
+<script type="text/javascript">
 var G={}
 G.$=function(n){
 	return document.getElementById(n) || n;
@@ -103,7 +104,7 @@ function Pad(){
 		var _slide=function(){
 			var b=-1 ,t=0, c=2, d=that.turn;
 			function _run(){
-				if(t&lt;d){ //半圈补间动画
+				if(t<d){ //半圈补间动画
 					t++;
 					m = - sign * easeInOut(t,b,c,d);
 					that.con.clearRect(0, 0, that.S, that.S);
@@ -181,7 +182,7 @@ var drawBg=function(){ //绘背景
 	bg.fillRect(0,0,G.scrW(),G.scrH());
 	bg.fillStyle='#fff';
 	bg.transform(-1,0,0,1,G.scrW(),0);
-	for (var i=20;i&gt;0;i--){
+	for (var i=20;i>0;i--){
       bg.beginPath();
 	  bg.scale(1,0.95);
 		if(i % 2 === 0){bg.globalAlpha = 0.05;}
@@ -192,44 +193,46 @@ var drawBg=function(){ //绘背景
 	bg.restore();
 }
 function easeInOut(t,b,c,d){ //补间算法
-	if ((t/=d/2) &lt; 1) return c/2*t*t + b;
+	if ((t/=d/2) < 1) return c/2*t*t + b;
 	return -c/2 * ((--t)*(t-2) - 1) + b;
 }
 window.onload=function(){
 	drawBg();
 	var max=20;
 	//var size=Math.max(G.scrW()/Math.sqrt(max),G.scrH()/Math.sqrt(max));
-	for(var i=0 ; i&lt;max; i++ ){
+	for(var i=0 ; i<max; i++ ){
 		new Pad().init({name:'pad'+i, turn: i+5});
 	}
 };
 window.onresize=function(){drawBg();}
-&lt;/script&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20101227__canvas__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20101227__canvas__1')">Copy</button></div></div>
+</script>
+</html>
+```
 
 下面是另一个玩意《忍者镖》，话说是受了这个大赛（http://js1k.com/2010-first/demos ）的刺激才写的。
 在这个大赛里，所有的Demo都必须小于1KB。
 
 于是，我就把我的代码往死里压。从这样：
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20101227__canvas__2">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;忍者镖&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>忍者镖</title>
+<style>
 *{padding:0;margin:0;}
 html,body{height:100%;overflow:hidden;text-align:center;}
 #middle{position:relative;z-index:2;height:100%;}
 #middle canvas{position:absolute;top:0;left:0;}
 #bg{position:absolute;z-index:1;top:0;left:0;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body &gt;
-	&lt;canvas id="bg"&gt;&lt;/canvas&gt;
-	&lt;div id='middle'&gt;&lt;/div&gt;
-&lt;/body&gt;
-&lt;script type="text/javascript"&gt;
+</style>
+</head>
+<body >
+	<canvas id="bg"></canvas>
+	<div id='middle'></div>
+</body>
+<script type="text/javascript">
 var G={}
 G.$=function(n){
 	return document.getElementById(n) || n;
@@ -254,7 +257,7 @@ Pad.prototype.run = function(){
 		var _slide=function(){
 			var t=0;
 			function _run(){
-				if(t&lt;Math.PI*6){
+				if(t<Math.PI*6){
 					t += 0.1;
 					that.m += sign * 0.1;
 					that.con.clearRect(0, 0, that.S, that.S);
@@ -318,27 +321,30 @@ var drawBg=function(){
 }
 window.onload=function(){
 	var max=10;
-	for(var i=0 ; i&lt;max; i++ ){
+	for(var i=0 ; i<max; i++ ){
 		new Pad().init({name:'pad'+i, m:i*0.1});
 	}
 	drawBg();
 };
 window.onresize=function(){drawBg();}
-&lt;/script&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20101227__canvas__2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20101227__canvas__2')">Copy</button></div></div>
+</script>
+</html>
+```
 斩头去尾，挖心掏肺，搞成这样：
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20101227__canvas__3">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;style&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<style>
 body{overflow:hidden;background:#666;}
 canvas{position:absolute;top:0;left:0;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;&lt;/body&gt;
-&lt;script type="text/javascript"&gt;
-function g(){var b=this;b.d=function(a){b.create();b.a=a.a;b.e()};b.e=function(){function a(){function e(){if(f&lt;Math.PI*8){f+=0.1;c.a+=d*0.1;c.b.clearRect(0,0,400,400);c.c();c.timeout=setTimeout(e,10)}else{d=-d;c.timeout=setTimeout(a,10)}}var f=0;e()}var d=1,c=b;a()};b.c=function(){var a=b.b;a.save();a.translate(200,200);a.rotate(b.a);if(b.a===0)b.a=0.0010;a.scale(b.a/10,b.a/10);a.strokeStyle="#333";a.fillStyle="#eee";a.lineWidth=1;a.beginPath();a.moveTo(20,-20);a.lineTo(80,0);a.lineTo(20,20);a.lineTo(0, 80);a.lineTo(-20,20);a.lineTo(-80,0);a.lineTo(-20,-20);a.lineTo(0,-80);a.lineTo(20,-20);a.translate(0,0);a.arc(0,0,8,0,Math.PI*2,true);a.stroke();a.fill();a.restore()};b.create=function(){var a=document.createElement("canvas");a.width=400;a.height=400;b.b=a.getContext("2d");document.body.appendChild(a)}}window.onload=function(){for(var b=0;b&lt;10;b++)(new g).d({a:b*0.1})};
-&lt;/script&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20101227__canvas__3')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20101227__canvas__3')">Copy</button></div></div>
+</style>
+</head>
+<body></body>
+<script type="text/javascript">
+function g(){var b=this;b.d=function(a){b.create();b.a=a.a;b.e()};b.e=function(){function a(){function e(){if(f<Math.PI*8){f+=0.1;c.a+=d*0.1;c.b.clearRect(0,0,400,400);c.c();c.timeout=setTimeout(e,10)}else{d=-d;c.timeout=setTimeout(a,10)}}var f=0;e()}var d=1,c=b;a()};b.c=function(){var a=b.b;a.save();a.translate(200,200);a.rotate(b.a);if(b.a===0)b.a=0.0010;a.scale(b.a/10,b.a/10);a.strokeStyle="#333";a.fillStyle="#eee";a.lineWidth=1;a.beginPath();a.moveTo(20,-20);a.lineTo(80,0);a.lineTo(20,20);a.lineTo(0, 80);a.lineTo(-20,20);a.lineTo(-80,0);a.lineTo(-20,-20);a.lineTo(0,-80);a.lineTo(20,-20);a.translate(0,0);a.arc(0,0,8,0,Math.PI*2,true);a.stroke();a.fill();a.restore()};b.create=function(){var a=document.createElement("canvas");a.width=400;a.height=400;b.b=a.getContext("2d");document.body.appendChild(a)}}window.onload=function(){for(var b=0;b<10;b++)(new g).d({a:b*0.1})};
+</script>
+</html>
+```
 结果，我的文件大小依然超出1KB，不得不佩服那些1KB Demos啊，个顶个的又小又炫。

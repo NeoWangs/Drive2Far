@@ -21,12 +21,13 @@ Getting Clever with CSS3 Shadows
 
 下面就是效果演示。略有改动，原demo没有考虑opera，在此补上。
 所以，应该除了ie9以下的浏览器，其他所以用户都能看见效果。
-<div class="runcode"><textarea class="runcode_text" id="runcode_20101103__css_CSS3_transform__1">&lt;!DOCTYPE HTML&gt;
-&lt;html&gt;
-&lt;head&gt;
-	&lt;meta charset="UTF-8"&gt;
-	&lt;title&gt;skew&lt;/title&gt;
-	&lt;style&gt;
+```html runcode
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>skew</title>
+	<style>
 	.box {
 		position: absolute;
 		padding: 2px;
@@ -57,14 +58,15 @@ Getting Clever with CSS3 Shadows
 		-o-transform: skew(-40deg);
 		transform: skew(-40deg);
 	}
-	&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div class="box"&gt;
-	&lt;img src='http://www.cssass.com/blog/resource/avatar/avatar.jpg'/&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20101103__css_CSS3_transform__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20101103__css_CSS3_transform__1')">Copy</button></div></div>
+	</style>
+</head>
+<body>
+<div class="box">
+	<img src='http://www.cssass.com/blog/resource/avatar/avatar.jpg'/>
+</div>
+</body>
+</html>
+```
 
 ————几分钟之后——————
 我们发现safari竟然不支持。
@@ -84,12 +86,13 @@ inset值在safari下不支持，这点我们之前就有所了解。除此之外
 
 那么为了兼容safari，我们可以修改一下：
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20101103__css_CSS3_transform__2">&lt;!DOCTYPE HTML&gt;
-&lt;html&gt;
-&lt;head&gt;
-	&lt;meta charset="UTF-8"&gt;
-	&lt;title&gt;skew&lt;/title&gt;
-	&lt;style&gt;
+```html runcode
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>skew</title>
+	<style>
 	.box {
 		position: absolute;
 		padding: 2px;
@@ -121,11 +124,12 @@ inset值在safari下不支持，这点我们之前就有所了解。除此之外
 		-o-transform: skew(-40deg);
 		transform: skew(-40deg);
 	}
-	&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div class="box"&gt;
-	&lt;img src='http://www.cssass.com/blog/resource/avatar/avatar.jpg'/&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20101103__css_CSS3_transform__2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20101103__css_CSS3_transform__2')">Copy</button></div></div>
+	</style>
+</head>
+<body>
+<div class="box">
+	<img src='http://www.cssass.com/blog/resource/avatar/avatar.jpg'/>
+</div>
+</body>
+</html>
+```

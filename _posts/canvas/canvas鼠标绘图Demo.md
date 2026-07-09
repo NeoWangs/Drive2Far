@@ -11,19 +11,20 @@ tags:
 permalink: "/2010/09/02/canvas鼠标绘图Demo/"
 ---
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20100902_canvas_Demo_1">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;cssass.com&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>cssass.com</title>
+<style>
 *{padding:0;margin:0;}
 html,body{height:100%;overflow:hidden;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body title='鼠标绘图'&gt;
-&lt;canvas id="pad" width='1800' height='1000' onmousedown=draw(event) style='border:1px solid #ccc'&gt;ie用户(9以下)请忽略&lt;/canvas&gt;
-&lt;script type="text/javascript"&gt;
+</style>
+</head>
+<body title='鼠标绘图'>
+<canvas id="pad" width='1800' height='1000' onmousedown=draw(event) style='border:1px solid #ccc'>ie用户(9以下)请忽略</canvas>
+<script type="text/javascript">
 var $id=function(n){
 	return document.getElementById(n) || n;
 }
@@ -50,34 +51,36 @@ var draw=function(e){
 		}
 	}
 }
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20100902_canvas_Demo_1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20100902_canvas_Demo_1')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```
 我之前用window.onload来绑定函数修改canvas的高度，这通过运行框运行open新页面，在chrome下获取document.documentElemnet.offsetHeight时会等于0，导致绘图板高度也没了。
 另外发现，Opera下绘线同其他浏览器有点差别：单独的一个path(即同上一次的path没有瓜葛)，如果没有moveTo设置起点，一般浏览器会以第一个lineTo为起点，这在Opera下是不正确的。
 
 下面再放一个百度UEO基于canvas绘制热力图的演示：
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20100902_canvas_Demo_2">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;canvas热力图演示&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>canvas热力图演示</title>
+<style>
 *{padding:0;margin:0;}
 .wrap{width:1000px;height:500px;margin:0 auto;border:2px solid #eee;}
 #pad{position:absolute;z-index:-1;top:0;left:50%;background:#eee;opacity:.8;}
 #switch{position:absolute;z-index:20;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body onmousedown=imit(event)&gt;
-&lt;div class="wrap" &gt;
-	&lt;img src="https://www.google.com.hk/intl/zh-CN/images/logo_cn.png" /&gt;
-	&lt;img src="https://www.google.com.hk/intl/zh-CN/images/logo_cn.png" /&gt;
-	&lt;img src="https://www.google.com.hk/intl/zh-CN/images/logo_cn.png" /&gt;
-&lt;/div&gt;
-&lt;input id="switch"type='button' value="切换热力图显示在上层" /&gt;
-&lt;script&gt;
+</style>
+</head>
+<body onmousedown=imit(event)>
+<div class="wrap" >
+	<img src="https://www.google.com.hk/intl/zh-CN/images/logo_cn.png" />
+	<img src="https://www.google.com.hk/intl/zh-CN/images/logo_cn.png" />
+	<img src="https://www.google.com.hk/intl/zh-CN/images/logo_cn.png" />
+</div>
+<input id="switch"type='button' value="切换热力图显示在上层" />
+<script>
 var canvas= document.createElement('canvas');
 var context = canvas.getContext('2d');
 	canvas.id = "pad";
@@ -89,7 +92,7 @@ var points =[];
 var oData = [];
 var imit=function(e){
 	points.push([e.clientX - canvas.offsetLeft, e.clientY]);  //手动模拟点,再按二次函数自动生成100个点。
-	for(var i=0; i&lt;100 ;i++){
+	for(var i=0; i<100 ;i++){
 		var r1=Math.random()*2,r2=Math.random()*2;
 		points.push([parseInt(Math.pow(r1,2)*500)+5,parseInt(Math.pow(r2,2)*150)+5])
 	}
@@ -99,7 +102,7 @@ var imit=function(e){
 function analy(){
 	var cache = {};
 	//计算每个点的密度
-	for (var i = 0, len = points.length; i &lt; len; i++) {
+	for (var i = 0, len = points.length; i < len; i++) {
 		var key = points[i][0] + '*' + points[i][1];
 		 if (cache[key]) {
 			cache[key] ++;
@@ -127,7 +130,7 @@ function draw(){
 	var pi2 = Math.PI * 2;
 	//alpha增强参数
 	var pr = (Math.log(245)-1)/245;
-	for (var i = 0, len = oData.length; i &lt; len; i++) {
+	for (var i = 0, len = oData.length; i < len; i++) {
 		//q参数用于平衡梯度差，使之符合人的感知曲线log2N，如需要精确梯度，去掉log计算
 		var q = parseInt(Math.log(oData[i][2]) / Math.log(max) * 255);
 		var r = parseInt(128 * Math.sin((1 / 256 * q - 0.5 ) * Math.PI ) + 200);
@@ -148,6 +151,7 @@ var switcher = document.getElementById("switch");
 		canvas.style.zIndex = (canvas.style.zIndex == -1) ?  10 : -1; //注意一点，style.xx只能取得行内样式的，要获取外部样式可以使用getComputedStyle和currentStyle.
 		//canvas.style.display = (canvas.style.display == 'block') ?  'none' : 'block';
 	}
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20100902_canvas_Demo_2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20100902_canvas_Demo_2')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```

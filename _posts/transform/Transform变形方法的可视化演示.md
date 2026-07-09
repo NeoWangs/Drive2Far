@@ -22,12 +22,13 @@ m12	m22	dy
 0	0	1
 对于transform方法的使用，其实很难把握，所以写了下面这个演示
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20101022_Transform__1">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;cssass.com&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>cssass.com</title>
+<style>
 #rule,#pad{float:left;margin:10px;}
 #rule p{padding;0;margin:0;line-height:25px;}
 #rule label{display:inline-block;width:80px;text-align:right;font-size:12px;}
@@ -36,21 +37,21 @@ m12	m22	dy
 #rule p a{position:absolute;top:-4px;left:50%;width:15px;height:15px;margin-left:-8px;border:1px solid #d3d3d3;background:#ececec;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;}
 #rule p a:hover{border:1px solid #999;background:#dcdcdc;}
 .footer{font-size:12px;padding:10px 0;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div id='rule'&gt;
-	&lt;h3&gt;Transform方法可视化操作演示&lt;/h3&gt;
-	&lt;p onmousedown='G.change(this,event,4);'&gt;&lt;label&gt;水平缩放 m11: &lt;/label&gt; &lt;b class='range'&gt;&lt;a onfocus="blur();"  href='javascript:;'&gt;&amp;nbsp;&lt;/a&gt;&lt;/b&gt; &lt;input id='m11' type='text' /&gt;&lt;/p&gt;
-	&lt;p onmousedown='G.change(this,event,4);'&gt;&lt;label&gt;y轴斜切 m12: &lt;/label&gt; &lt;b class='range'&gt;&lt;a onfocus="blur();"  href='javascript:;'&gt;&amp;nbsp;&lt;/a&gt;&lt;/b&gt; &lt;input id='m12' type='text' /&gt;&lt;/p&gt;
-	&lt;p onmousedown='G.change(this,event,4);'&gt;&lt;label&gt;x轴斜切 m21: &lt;/label&gt; &lt;b class='range'&gt;&lt;a onfocus="blur();"  href='javascript:;'&gt;&amp;nbsp;&lt;/a&gt;&lt;/b&gt; &lt;input id='m21' type='text' /&gt;&lt;/p&gt;
-	&lt;p onmousedown='G.change(this,event,4);'&gt;&lt;label&gt;垂直缩放 m22: &lt;/label&gt; &lt;b class='range'&gt;&lt;a onfocus="blur();"  href='javascript:;'&gt;&amp;nbsp;&lt;/a&gt;&lt;/b&gt; &lt;input id='m22' type='text' /&gt;&lt;/p&gt;
-	&lt;p onmousedown='G.change(this,event,1000);'&gt;&lt;label&gt;平移 dx: &lt;/label&gt; &lt;b class='range'&gt;&lt;a onfocus="blur();"  href='javascript:;'&gt;&amp;nbsp;&lt;/a&gt;&lt;/b&gt; &lt;input id='dx' type='text' /&gt;&lt;/p&gt;
-	&lt;p onmousedown='G.change(this,event,1000);'&gt;&lt;label&gt;纵移 dy: &lt;/label&gt; &lt;b class='range'&gt;&lt;a onfocus="blur();"  href='javascript:;'&gt;&amp;nbsp;&lt;/a&gt;&lt;/b&gt; &lt;input id='dy' type='text' /&gt;&lt;/p&gt;
-	&lt;div class='footer'&gt;首先在右侧用鼠标画一矩形。&lt;br /&gt;Javascript by &lt;a href='http://www.cssass.com'&gt;cssass.com&lt;/a&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;canvas id="pad" width='800' height="600" style="position:relative;border:1px solid #c3c3c3;cursor:crosshair;"&gt;注意：ie9以下用户请绕行&lt;/canvas&gt;
-&lt;script&gt;
+</style>
+</head>
+<body>
+<div id='rule'>
+	<h3>Transform方法可视化操作演示</h3>
+	<p onmousedown='G.change(this,event,4);'><label>水平缩放 m11: </label> <b class='range'><a onfocus="blur();"  href='javascript:;'>&nbsp;</a></b> <input id='m11' type='text' /></p>
+	<p onmousedown='G.change(this,event,4);'><label>y轴斜切 m12: </label> <b class='range'><a onfocus="blur();"  href='javascript:;'>&nbsp;</a></b> <input id='m12' type='text' /></p>
+	<p onmousedown='G.change(this,event,4);'><label>x轴斜切 m21: </label> <b class='range'><a onfocus="blur();"  href='javascript:;'>&nbsp;</a></b> <input id='m21' type='text' /></p>
+	<p onmousedown='G.change(this,event,4);'><label>垂直缩放 m22: </label> <b class='range'><a onfocus="blur();"  href='javascript:;'>&nbsp;</a></b> <input id='m22' type='text' /></p>
+	<p onmousedown='G.change(this,event,1000);'><label>平移 dx: </label> <b class='range'><a onfocus="blur();"  href='javascript:;'>&nbsp;</a></b> <input id='dx' type='text' /></p>
+	<p onmousedown='G.change(this,event,1000);'><label>纵移 dy: </label> <b class='range'><a onfocus="blur();"  href='javascript:;'>&nbsp;</a></b> <input id='dy' type='text' /></p>
+	<div class='footer'>首先在右侧用鼠标画一矩形。<br />Javascript by <a href='http://www.cssass.com'>cssass.com</a></div>
+</div>
+<canvas id="pad" width='800' height="600" style="position:relative;border:1px solid #c3c3c3;cursor:crosshair;">注意：ie9以下用户请绕行</canvas>
+<script>
 var $id=function(o){return document.getElementById(o);}
 var con=$id("pad").getContext('2d');
 var G={};
@@ -59,7 +60,7 @@ G.val=[[4,1],[4,0],[4,0],[4,1],[1000,0],[1000,0]];
 G.init=function(){
 	var list=$id('rule').getElementsByTagName('p');
 	var left, value;
-	for(var i=0; i&lt;list.length; i++){
+	for(var i=0; i<list.length; i++){
 		value = G.val[i][1];
 		left =(0.5 + G.val[i][1] / G.val[i][0] ) * 100;
 		list[i].getElementsByTagName('a')[0].style.left= left + '%';
@@ -94,7 +95,7 @@ G.change=function(obj,e,l,v){
 	document.onmousemove=function(e){
 		var e = e ? e : window.event;
 		var len=tX+e.clientX-dx+8;
-		if(len&gt;=0 &amp;&amp; len&lt;=150){
+		if(len>=0 && len<=150){
 			var rat=(len / 150) * 100;
 			o.style.left=rat+ "%";
 			obj.getElementsByTagName('input')[0].value =l * Math.round((rat - 50)*10)/1000;
@@ -130,6 +131,7 @@ G.rect=function(x1,y1,x2,y2){
 }
 window.addEventListener("load", G.init, false);
 $id("pad").addEventListener("mousedown", G.draw, false);
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20101022_Transform__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20101022_Transform__1')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```

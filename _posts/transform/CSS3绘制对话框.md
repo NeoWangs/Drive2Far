@@ -20,12 +20,13 @@ permalink: "/2011/03/09/CSS3绘制对话框/"
 今天这个效果的实现还是用到了transform（之中的skew）。
 
 看代码:
-<div class="runcode"><textarea class="runcode_text" id="runcode_20110309_CSS3__1">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;采用css3的语言框效果&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>采用css3的语言框效果</title>
+<style>
 .wrap{position:relative;}
 .bd{
 	background:#BDCEEF;width:250px;height:80px;padding:10px;position:relative;z-index:2;
@@ -55,9 +56,9 @@ permalink: "/2011/03/09/CSS3绘制对话框/"
 	-webkit-box-shadow: 5px 8px 11px rgba(0,0,0,0.4);
 	-moz-box-shadow: 5px 8px 11px rgba(0,0,0,0.4);
 }
-&lt;/style&gt;
-&lt;!--[if lte IE 8]&gt;
-&lt;style type="text/css"&gt;
+</style>
+<!--[if lte IE 8]>
+<style type="text/css">
 /* 对ie实行人道处置 */
 .cor{
 	width:0;height:0;bottom:-30px;overflow:hidden;background:transparent;
@@ -65,17 +66,18 @@ permalink: "/2011/03/09/CSS3绘制对话框/"
 	border-top-color:#BDCEEF;
 	border-left-color:#BDCEEF;
 }
-&lt;/style&gt;
-&lt;![endif]--&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div class='wrap'&gt;
-	&lt;div class='bd'&gt;Hello everybody&lt;/div&gt;
-	&lt;div class="cor"&gt;&lt;/div&gt;
-	&lt;div class="cor cor_s"&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20110309_CSS3__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20110309_CSS3__1')">Copy</button></div></div>
+</style>
+<![endif]-->
+</head>
+<body>
+<div class='wrap'>
+	<div class='bd'>Hello everybody</div>
+	<div class="cor"></div>
+	<div class="cor cor_s"></div>
+</div>
+</body>
+</html>
+```
 
 上面的代码中，我们可以看见有一句ie的滤镜注释，那是ie的阴影滤镜。
 其实ie在很早的时候就开始以滤镜的形式支持各种变形和阴影了，所以如果你想让ie（9以下）浏览器也能展现css3的那些效果，你也可以考虑滤镜实现。

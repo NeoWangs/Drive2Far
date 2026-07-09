@@ -45,23 +45,24 @@ var removeEvent = function(target,type,fn ) {
 ```
 
 我们的mouseenter/leave是通过mouseover/out来实现的，只需屏蔽mouseover/out在元素内部触发时的事件传播即可。
- <div class="runcode"><textarea class="runcode_text" id="runcode_20111218_mouseenter_mouseleave_delegate__1">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;实现mouseenter、mouseleave事件&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>实现mouseenter、mouseleave事件</title>
+<style>
 .outer{padding:50px;background:#aaa;}
 .inner{height:100px;background:#eee;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div id="outer" class="outer"&gt;
+</style>
+</head>
+<body>
+<div id="outer" class="outer">
 	只有移进移出外框的时候才执行方法。对内框操作不执行。click点击解除绑定。
-	&lt;div id="inner" class="inner"&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;script&gt;
+	<div id="inner" class="inner"></div>
+</div>
+</body>
+<script>
 var $id=function(o){return document.getElementById(o) || o;}
 var events = {}
 events._mouseFn ={}; //保存“onmouseenter”和“onmouseleave”所绑定的方法
@@ -70,12 +71,12 @@ events._mouseHandle = function(fn){
 	var func = function(event){
 		var target = event.target;
 		var parent = event.relatedTarget; //在onmouseover/out操作中，相关的另一个节点
-		while( parent &amp;&amp; parent != this ){
+		while( parent && parent != this ){
 			try{ parent = parent.parentNode; }
 			catch(e){break;}
 		}
 		/* 只有当相关节点的父级不会是绑定的节点时（即二者不是父子的包含关系），才调用fn，否则不做处理 */
-		( parent != this ) &amp;&amp; (fn.call(target,event));
+		( parent != this ) && (fn.call(target,event));
 	};
 	return func;
 }
@@ -143,7 +144,8 @@ events.removeEvent = function(obj,type,fn ) {
 		inner.innerHTML = "click";
 	}
 })()
-&lt;/script&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20111218_mouseenter_mouseleave_delegate__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20111218_mouseenter_mouseleave_delegate__1')">Copy</button></div></div>
+</script>
+```
 为了解除绑定，我们设计了一个events._mouseFn来保存绑定的方法，在解除操作时读取对应的方法进行解绑。因为事件可以绑定多个方法，我们需要保存对应的方法，以便之后对应解除。
 当然如果这里如果按面向对象的思路实现，就可以各自保存，而不需要保持在同一个events._mouseFn对象下。但每绑定一个事件，都需实例化一个对象，显得很多余，所以不采用面向对象的模式。
 
@@ -153,32 +155,33 @@ events.removeEvent = function(obj,type,fn ) {
 这么做的好处有：
 1：如果子级有n个并列元素需要绑定，绑子级需要绑n次，而将其绑定在父级上则只需绑定一次，这是很高效的。
 2：如果子级元素有动态增加的话，新增元素是没有绑定过任何事件方法的。而如果之前选择的是绑定其父级，就不会有这个问题。
- <div class="runcode"><textarea class="runcode_text" id="runcode_20111218_mouseenter_mouseleave_delegate__2">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;delegate委托绑定事件方法的实现&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>delegate委托绑定事件方法的实现</title>
+<style>
 .outer{padding:50px;background:#aaa;zoom:1;}
 .inner{display:block;height:50px;margin:5px;background:#eee;border:1px solid #ccc;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div id="outer" class="outer"&gt;
-	&lt;div id="message"&gt;点击下面框体&lt;/div&gt;
-	&lt;span class="inner"&gt;1:&lt;/span&gt;
-	&lt;span class="inner"&gt;2:&lt;/span&gt;
-	&lt;span class="inner"&gt;3:&lt;/span&gt;
-	&lt;span class="inner"&gt;4:&lt;/span&gt;
-	&lt;span class="inner"&gt;5:&lt;/span&gt;
-	&lt;div id="unbind"&gt;点击解除绑定&lt;/div&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;script&gt;
+</style>
+</head>
+<body>
+<div id="outer" class="outer">
+	<div id="message">点击下面框体</div>
+	<span class="inner">1:</span>
+	<span class="inner">2:</span>
+	<span class="inner">3:</span>
+	<span class="inner">4:</span>
+	<span class="inner">5:</span>
+	<div id="unbind">点击解除绑定</div>
+</div>
+</body>
+<script>
 //一些通用方法
 var $id=function(o){return document.getElementById(o) || o;}
 var isDOMs = function(target){
-	return target.length &gt;= 0 &amp;&amp; target !== window &amp;&amp; !target.tagName;  //!target.tagName排除FORM,SELECT等元素
+	return target.length >= 0 && target !== window && !target.tagName;  //!target.tagName排除FORM,SELECT等元素
 };
 var hasClass = function(target,className){
 	if(!target || !className) return false;
@@ -196,12 +199,12 @@ events._mouseHandle = function(fn){
 	var func = function(event){
 		var target = event.target;
 		var parent = event.relatedTarget; //在onmouseover/out操作中，相关的另一个节点
-		while( parent &amp;&amp; parent != this ){
+		while( parent && parent != this ){
 			try{ parent = parent.parentNode; }
 			catch(e){break;}
 		}
 		/* 只有当相关节点的父级不会是绑定的节点时（即二者不是父子的包含关系），才调用fn，否则不做处理 */
-		( parent != this ) &amp;&amp; (fn.call(target,event));
+		( parent != this ) && (fn.call(target,event));
 	};
 	return func;
 }
@@ -213,7 +216,7 @@ events._delegateHandle = function(obj,selector,fn){
 		var parent = target;
 		function contain(item,elmName){
 			if(elmName.split('#')[1]){ //by id
-				if(item.id &amp;&amp; item.id === elmName.split('#')[1]) return true;
+				if(item.id && item.id === elmName.split('#')[1]) return true;
 			}
 			if(elmName.split('.')[1]){ //by class
 				if(hasClass(item, elmName.split('.')[1])) return true;
@@ -249,7 +252,7 @@ events.addEvent = function(target,type,fn){
 		}
 	}
 	if(isDOMs(target)) {
-		for(var i=0, l = target.length; i &lt; l; i++){
+		for(var i=0, l = target.length; i < l; i++){
 			add(target[i])
 		}
 	}else{
@@ -273,7 +276,7 @@ events.removeEvent = function(target,type,fn) {
 		}
     }
     if(isDOMs(target)) {
-		for(var i=0, l = target.length; i &lt; l; i++){
+		for(var i=0, l = target.length; i < l; i++){
 			remove(target[i])
 		}
 	}else{
@@ -318,7 +321,8 @@ events.undelegate = function(obj,selector,type,fn){
 	events.delegate(outer,".inner","click",color);
 	events.delegate(outer,"#unbind","click",remove);
 })()
-&lt;/script&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20111218_mouseenter_mouseleave_delegate__2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20111218_mouseenter_mouseleave_delegate__2')">Copy</button></div></div>
+</script>
+```
 这里的实现思路是这样的：如果触发事件的元素，是你想要绑定的元素的子级（当然他肯定已是委托实际绑定元素的子级），就执行绑定的事件方法，否则方法就不执行，看上去就像方法没绑定过一样。
 同实现onmouseenter一样，我们也设计了一个events._deleFn来用于后面的解绑方法undelegate的实现。
 另外针对ie，我们还解决了两个问题：
@@ -327,31 +331,32 @@ events.undelegate = function(obj,selector,type,fn){
 
 在使用delegate时，我们同样遇到了mouseover/out的问题。
 我们的解决方案是：不罗嗦，直接将mouseover/out处理成mouseenter/leave
- <div class="runcode"><textarea class="runcode_text" id="runcode_20111218_mouseenter_mouseleave_delegate__3">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;title&gt;delegate委托绑定事件方法的实现&lt;/title&gt;
-&lt;style&gt;
+```html runcode
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>delegate委托绑定事件方法的实现</title>
+<style>
 .outer{padding:50px;background:#aaa;zoom:1;}
 .inner{display:block;height:50px;background:#eee;border:1px solid #ccc;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div id="outer" class="outer"&gt;
-	&lt;div id="message"&gt;划过下面框体&lt;/div&gt;
-	&lt;span class="inner"&gt;1:&lt;/span&gt;
-	&lt;span class="inner"&gt;2:&lt;/span&gt;
-	&lt;span class="inner"&gt;3:&lt;/span&gt;
-	&lt;span class="inner"&gt;4:&lt;/span&gt;
-	&lt;span class="inner"&gt;5:&lt;/span&gt;
-	&lt;div id="unbind"&gt;点击解除绑定&lt;/div&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;script&gt;
+</style>
+</head>
+<body>
+<div id="outer" class="outer">
+	<div id="message">划过下面框体</div>
+	<span class="inner">1:</span>
+	<span class="inner">2:</span>
+	<span class="inner">3:</span>
+	<span class="inner">4:</span>
+	<span class="inner">5:</span>
+	<div id="unbind">点击解除绑定</div>
+</div>
+</body>
+<script>
 var $id=function(o){return document.getElementById(o) || o;}
 var isDOMs = function(target){
-	return target.length &gt;= 0 &amp;&amp; target !== window &amp;&amp; !target.tagName;  //!target.tagName排除FORM,SELECT等元素
+	return target.length >= 0 && target !== window && !target.tagName;  //!target.tagName排除FORM,SELECT等元素
 };
 window.events = {}
 events._deleFn = {}; //保存delegate所绑定的方法
@@ -362,12 +367,12 @@ events._mouseHandle = function(fn){
 	var func = function(event){
 		var target = event.target;
 		var parent = event.relatedTarget; //在onmouseover/out操作中，相关的另一个节点
-		while( parent &amp;&amp; parent != this ){
+		while( parent && parent != this ){
 			try{ parent = parent.parentNode; }
 			catch(e){break;}
 		}
 		/* 只有当相关节点的父级不会是绑定的节点时（即二者不是父子的包含关系），才调用fn，否则不做处理 */
-		( parent != this ) &amp;&amp; (fn.call(target,event));
+		( parent != this ) && (fn.call(target,event));
 	};
 	return func;
 }
@@ -379,7 +384,7 @@ events._delegateHandle = function(obj,selector,fn){
 		var parent = target;
 		function contain(item,elmName){
 			if(elmName.split('#')[1]){ //by id
-				if(item.id &amp;&amp; item.id === elmName.split('#')[1]) return true;
+				if(item.id && item.id === elmName.split('#')[1]) return true;
 			}
 			if(elmName.split('.')[1]){ //by class
 				if(hasClass(item, elmName.split('.')[1])) return true;
@@ -402,11 +407,11 @@ events._delegateHandle = function(obj,selector,fn){
 						fn.call(obj,event);
 						return;
 					}
-					while( related &amp;&amp; !contain(related,selector)){
+					while( related && !contain(related,selector)){
 						  related = related.parentNode;
 					}
 					/* 事件相关元素，不属于绑定元素(selector)的子级，执行方法  */
-					!contain(related,selector) &amp;&amp; (fn.call(obj,event));
+					!contain(related,selector) && (fn.call(obj,event));
 				}else{
 					fn.call(obj,event);
 				}
@@ -448,7 +453,7 @@ events.addEvent = function(target,type,fn){
 		}
 	}
 	if(isDOMs(target)) {
-		for(var i=0, l = target.length; i &lt; l; i++){
+		for(var i=0, l = target.length; i < l; i++){
 			add(target[i])
 		}
 	}else{
@@ -479,7 +484,7 @@ events.removeEvent = function(target,type,fn) {
 		}
     }
     if(isDOMs(target)) {
-		for(var i=0, l = target.length; i &lt; l; i++){
+		for(var i=0, l = target.length; i < l; i++){
 			remove(target[i])
 		}
 	}else{
@@ -520,7 +525,8 @@ events.undelegate = function(obj,selector,type,fn){
 		events.undelegate(outer,'#unbind',"click",remove);
 	}
 })()
-&lt;/script&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20111218_mouseenter_mouseleave_delegate__3')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20111218_mouseenter_mouseleave_delegate__3')">Copy</button></div></div>
+</script>
+```
 最后，整理一下，封装一个支持mouseenter 和 mouseleave事件，delegate方法 及其他们的解除绑定的方法的 功能函数库。
 
 ```

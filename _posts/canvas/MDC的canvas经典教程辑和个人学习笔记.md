@@ -25,15 +25,16 @@ Basic animations(中译：基本动画)
 以下是个人的一点笔记，涵盖了教程中所有知识点。但只适用于个人，存此备忘。
 
 canvas_ABC
-<div class="runcode"><textarea class="runcode_text" id="runcode_20100910_MDC_canvas__1">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;cssass.com&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;canvas id="myCanvas" width='800' height="500" style="border:1px solid #c3c3c3;"&gt;ie（有ie9求测试）用户请绕行&lt;/canvas&gt;
-&lt;script type="text/javascript"&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>cssass.com</title>
+</head>
+<body>
+<canvas id="myCanvas" width='800' height="500" style="border:1px solid #c3c3c3;">ie（有ie9求测试）用户请绕行</canvas>
+<script type="text/javascript">
 var c=document.getElementById("myCanvas");
 var con=c.getContext('2d');   //-----画矩形框
 var grd=con.createLinearGradient(10,10,150,10);
@@ -95,20 +96,22 @@ con6.shadowColor='rgba(0,0,0,0.5)';
 con6.font='20px Times New Roman';
 con6.fillStyle='black';
 con6.fillText('hello HTML5',0,300);
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20100910_MDC_canvas__1')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20100910_MDC_canvas__1')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```
 canvas_DEF
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20100910_MDC_canvas__2">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;cssass.com&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;canvas id="myCanvas" width='1000' height="600" style="border:1px solid #c3c3c3;"&gt;ie（有ie9求测试）用户请绕行&lt;/canvas&gt;
-&lt;script type="text/javascript"&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>cssass.com</title>
+</head>
+<body>
+<canvas id="myCanvas" width='1000' height="600" style="border:1px solid #c3c3c3;">ie（有ie9求测试）用户请绕行</canvas>
+<script type="text/javascript">
 var c=document.getElementById("myCanvas");
 var con1=c.getContext('2d');   //-----用于保存一些状态属性。
   con1.fillRect(0,0,40,40);
@@ -140,44 +143,46 @@ con1.restore();
   con1.translate(200, 200);
   var sin = Math.sin(Math.PI/6);
   var cos = Math.cos(Math.PI/6);
-  for (var i=0; i &lt;= 12; i++) {
+  for (var i=0; i <= 12; i++) {
     con1.fillRect(0, 0, 100, 10);
     con1.transform(cos, sin, -sin, cos, 0, 0);  // (m11, m12, m21, m22, dx, dy) 水平缩放，垂直斜切，水平斜切，垂直缩放，水平平移，垂直平移。
   }
   con1.setTransform(1,0.5 , 0, 1,0, 0);  //set重置后设置。
   con1.fillRect(300,300, 100, 100);
 }()
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20100910_MDC_canvas__2')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20100910_MDC_canvas__2')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```
 
 canvas_HIJ
 
-<div class="runcode"><textarea class="runcode_text" id="runcode_20100910_MDC_canvas__3">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset='UTF-8' /&gt;
-&lt;title&gt;cssass.com&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;canvas id="myCanvas" width='350' height="300" style="border:1px solid #c3c3c3;"&gt;ie（有ie9求测试）用户请绕行&lt;/canvas&gt;
-&lt;canvas id="myCanvas2" width='350' height="300" style="border:1px solid #c3c3c3;"&gt;ie（有ie9求测试）用户请绕行&lt;/canvas&gt;
-&lt;br /&gt;
-&lt;select id='types' onchange='comp();'&gt;
-	&lt;option value='source-over' selected&gt;source-over&lt;/option&gt;
-	&lt;option value='source-in'&gt;source-in&lt;/option&gt;
-	&lt;option value='source-out'&gt;source-out&lt;/option&gt;
-	&lt;option value='source-atop'&gt;source-atop&lt;/option&gt;
-	&lt;option value='destination-over'&gt;destination-over&lt;/option&gt;
-	&lt;option value='destination-in'&gt;destination-in&lt;/option&gt;
-	&lt;option value='destination-out'&gt;destination-out&lt;/option&gt;
-	&lt;option value='destination-atop'&gt;destination-atop&lt;/option&gt;
-	&lt;option value='lighter'&gt;lighter&lt;/option&gt;
-	&lt;option value='darker'&gt;darker&lt;/option&gt;
-	&lt;option value='copy'&gt;copy&lt;/option&gt;
-	&lt;option value='xor'&gt;xor&lt;/option&gt;
-&lt;/select&gt;
-&lt;script type="text/javascript"&gt;
+```html runcode
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8' />
+<title>cssass.com</title>
+</head>
+<body>
+<canvas id="myCanvas" width='350' height="300" style="border:1px solid #c3c3c3;">ie（有ie9求测试）用户请绕行</canvas>
+<canvas id="myCanvas2" width='350' height="300" style="border:1px solid #c3c3c3;">ie（有ie9求测试）用户请绕行</canvas>
+<br />
+<select id='types' onchange='comp();'>
+	<option value='source-over' selected>source-over</option>
+	<option value='source-in'>source-in</option>
+	<option value='source-out'>source-out</option>
+	<option value='source-atop'>source-atop</option>
+	<option value='destination-over'>destination-over</option>
+	<option value='destination-in'>destination-in</option>
+	<option value='destination-out'>destination-out</option>
+	<option value='destination-atop'>destination-atop</option>
+	<option value='lighter'>lighter</option>
+	<option value='darker'>darker</option>
+	<option value='copy'>copy</option>
+	<option value='xor'>xor</option>
+</select>
+<script type="text/javascript">
 var $id=function(n){
 	return document.getElementById(n) || n;
 }
@@ -210,7 +215,7 @@ function draw() {
   con2.clip();
   con2.fillStyle = '#143778';
   con2.fillRect(-75,-75,150,150);
-  for (j=1;j&lt;50;j++){
+  for (j=1;j<50;j++){
     con2.save();
     con2.fillStyle = '#fff';
     con2.translate(75-Math.floor(Math.random()*150),75-Math.floor(Math.random()*150));
@@ -224,7 +229,7 @@ function drawStar(con2,r){  //五角星的画法
   con2.save();
   con2.beginPath()
   con2.moveTo(r,0);
-  for (i=0;i&lt;9;i++){
+  for (i=0;i<9;i++){
     con2.rotate(Math.PI/5);
     if(i%2 == 0) {
       con2.lineTo((r/0.525731)*0.200811,0);
@@ -236,6 +241,7 @@ function drawStar(con2,r){  //五角星的画法
   con2.fill();
   con2.restore();
 }
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</textarea><div class="runcode_actions"><button type="button" class="runcode_button" onclick="runcode.open('runcode_20100910_MDC_canvas__3')">Run</button><button type="button" class="runcode_button" onclick="runcode.copy('runcode_20100910_MDC_canvas__3')">Copy</button></div></div>
+</script>
+</body>
+</html>
+```
