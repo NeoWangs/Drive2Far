@@ -1,19 +1,23 @@
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<div class="comments" id="gitalk-container"></div>
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-<script>
-(function () {
-  var param = {
-    clientID: '{{ site.heibai.comments.clientID }}',
-    clientSecret: '{{ site.heibai.comments.clientSecret }}',
-    repo: '{{ site.heibai.comments.repo }}',
-    owner: '{{ site.heibai.comments.owner }}',
-    admin: ['{{ site.heibai.comments.admin }}'],
-    id: location.pathname,
-    language: '{{ site.heibai.comments.language | default: "zh-CN" }}'
-  };
-  var gitalk = new Gitalk(param);
-  gitalk.render('gitalk-container');
-})();
-</script>
-
+{% assign comments = site.heibai.comments %}
+{% assign giscus = comments.giscus %}
+<div class="comments">
+  {% if giscus.repo and giscus.repo != '' and giscus.repo_id and giscus.repo_id != '' and giscus.category_id and giscus.category_id != '' %}
+  <script src="https://giscus.app/client.js"
+    data-repo="{{ giscus.repo }}"
+    data-repo-id="{{ giscus.repo_id }}"
+    data-category="{{ giscus.category | default: 'General' }}"
+    data-category-id="{{ giscus.category_id }}"
+    data-mapping="{{ giscus.mapping | default: 'pathname' }}"
+    data-strict="{{ giscus.strict | default: '0' }}"
+    data-reactions-enabled="{{ giscus.reactions_enabled | default: '1' }}"
+    data-emit-metadata="{{ giscus.emit_metadata | default: '0' }}"
+    data-input-position="{{ giscus.input_position | default: 'bottom' }}"
+    data-theme="{{ giscus.theme | default: 'preferred_color_scheme' }}"
+    data-lang="{{ giscus.lang | default: comments.language | default: site.lang | default: 'zh-CN' }}"
+    crossorigin="anonymous"
+    async>
+  </script>
+  {% else %}
+  <div class="comments__notice">评论系统尚未完成 Giscus 配置。请先在 GitHub 仓库开启 Discussions，并填写 category_id。</div>
+  {% endif %}
+</div>

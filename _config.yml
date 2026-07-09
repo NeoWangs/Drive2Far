@@ -126,10 +126,17 @@ heibai:
       url: http://beian.miit.gov.cn/
   comments:
     enable: true
-    owner: neoxone2
-    admin: neoxone2
-    repo: hexo_comments
-    clientID: bc87b42f6b10a638d798
-    clientSecret: bf741d0c9c429f37a79b88c8cabc3955ab64af41
     language: zh-CN
+    giscus:
+      repo: NeoWangs/Drive2Far
+      repo_id: R_kgDOTQGHqg
+      category: General
+      category_id: DIC_kwDOTQGHqs4DA0bc
+      mapping: pathname
+      strict: "0"
+      reactions_enabled: "1"
+      emit_metadata: "0"
+      input_position: bottom
+      theme: preferred_color_scheme
+      lang: zh-CN
   mathjax: true
