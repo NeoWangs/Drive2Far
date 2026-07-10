@@ -113,13 +113,13 @@ heibai:
       - name: HeiBai · 黑白双式主题
         url: https://github.com/NeoWangs/hexo-theme-heibai
       - name: 申请友链
-        url: mailto:neoxone2@gmail.com
+        url: mailto:neoxminds@gmail.com
     social:
       - name: GitHub
-        url: https://github.com/neoxone2
+        url: https://github.com/NeoWangs
       - name: 知乎
         url: https://www.zhihu.com/people/neoxone
-    contact_email: neoxone2@gmail.com
+    contact_email: neoxminds@gmail.com
     copyright: "Mr.Drive2Far © 2011–2026 · 由 Jekyll 及 王白先生 驱动"
     beian:
       text: 浙ICP备09004927号
