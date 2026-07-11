@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-# Let files under _posts omit Jekyll's usual YYYY-MM-DD filename prefix.
+# Let files under Blog omit Jekyll's usual YYYY-MM-DD filename prefix.
 # Each post still needs a date in its front matter.
 module Jekyll
   DATELESS_POST_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.(?:md|markdown|mkd|mkdn|mdown))$!i.freeze
 
   class PostReader
     def read_posts(dir)
-      read_publishable(dir, "_posts", DATELESS_POST_FILENAME_MATCHER)
+      read_publishable(dir, "Blog", DATELESS_POST_FILENAME_MATCHER)
     end
   end
 

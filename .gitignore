@@ -8,4 +8,4 @@ vendor/
 *.gem
 tags/
 categories/
-/_posts/.obsidian
+/Blog/.obsidian
