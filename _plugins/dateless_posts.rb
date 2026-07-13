@@ -3,11 +3,25 @@
 # Let files under Blog omit Jekyll's usual YYYY-MM-DD filename prefix.
 # Each post still needs a date in its front matter.
 module Jekyll
+  POSTS_DIRECTORY = "Blog".freeze
   DATELESS_POST_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.(?:md|markdown|mkd|mkdn|mdown))$!i.freeze
+
+  # Blog is a regular directory name, so Jekyll would normally traverse it
+  # again and publish every Markdown file as a page. Posts are read from the
+  # directory at the site root before this recursive traversal occurs.
+  module SkipBlogPageReader
+    def read_directories(dir = "")
+      return if dir.delete_prefix("/") == POSTS_DIRECTORY
+
+      super
+    end
+  end
+
+  Reader.prepend(SkipBlogPageReader)
 
   class PostReader
     def read_posts(dir)
-      read_publishable(dir, "Blog", DATELESS_POST_FILENAME_MATCHER)
+      read_publishable(dir, POSTS_DIRECTORY, DATELESS_POST_FILENAME_MATCHER)
     end
   end
 

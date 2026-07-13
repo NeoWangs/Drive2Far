@@ -35,7 +35,6 @@ exclude:
   - vendor
   - .bundle
   - .codex_tmp
-  - Blog
   - tags
   - categories
 
