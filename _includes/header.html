@@ -13,6 +13,7 @@
     <a class="nav__item{% if current_category == cat.name %} is-active{% endif %}" href="{{ '/' | append: cat.name | append: '/' | relative_url }}">{% if cat.name == 'essay' %}{{ cat.cn }}{% else %}{{ cat.en }}{% endif %}</a>
     {% endfor %}
     <a class="nav__item{% if page.layout == 'about' %} is-active{% endif %}" href="{{ '/about/' | relative_url }}">时间线</a>
+    <a class="nav__item" href="https://neoxmind.com/" target="_blank" rel="noopener noreferrer">数字花园</a>
   </nav>
   <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换主题">
     <span class="theme-toggle__icon">◐</span>
@@ -28,5 +29,5 @@
   <a href="{{ '/' | append: cat.name | append: '/' | relative_url }}">{% if cat.name == 'essay' %}{{ cat.cn }}{% else %}{{ cat.en }}{% endif %}</a>
   {% endfor %}
   <a href="{{ '/about/' | relative_url }}">时间线</a>
+  <a href="https://neoxmind.com/" target="_blank" rel="noopener noreferrer">数字花园</a>
 </div>
-
