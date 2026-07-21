@@ -18,6 +18,15 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
 
+# 豆瓣卡片：{% douban book|movie|music SUBJECT_ID %}
+# Obsidian 写法：> [!douban] book|movie|music SUBJECT_ID
+# 首次构建会抓取并缓存到 .jekyll-cache/douban_cards.json。
+# 如个别条目需要登录，可将 cookie 写在本处，或设置环境变量 DOUBAN_COOKIE。
+# cache_images 开启后，封面下载到文章同名目录，不再依赖第三方图片代理。
+douban_card:
+  cache_images: true
+  request_timeout: 15
+
 feed:
   path: atom.xml
 
