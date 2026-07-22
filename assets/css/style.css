@@ -830,7 +830,7 @@ a {
 }
 .site-footer__grid {
   display: grid;
-  grid-template-columns: auto 1fr 1fr 1fr;
+  grid-template-columns: auto repeat(4, minmax(0, 1fr));
   gap: 56px;
   padding: 56px 40px 48px 64px;
 }
@@ -890,6 +890,10 @@ a {
   }
   .nav-burger {
     display: flex;
+  }
+  .site-footer__grid {
+    grid-template-columns: auto repeat(2, minmax(0, 1fr));
+    row-gap: 32px;
   }
 }
 @media (max-width: 768px) {

@@ -4,6 +4,12 @@
       {% for line in site.heibai.footer.couplet %}<span{% if forloop.last %} class="accent"{% endif %}>{{ line }}</span>{% endfor %}
     </div>
     <div class="site-footer__col">
+      <div class="site-footer__col-label mono">站点</div>
+      {% for site_link in site.heibai.footer.sites %}
+      <a href="{{ site_link.url }}" target="_blank" rel="noopener noreferrer">{{ site_link.name }} ↗</a>
+      {% endfor %}
+    </div>
+    <div class="site-footer__col">
       <div class="site-footer__col-label mono">朋友</div>
       {% for link in site.heibai.footer.links %}
       <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.name }} ↗</a>
@@ -25,4 +31,3 @@
     <a href="{{ site.heibai.footer.beian.url }}" target="_blank" rel="noopener">{{ site.heibai.footer.beian.text }}</a>
   </div>
 </footer>
-
